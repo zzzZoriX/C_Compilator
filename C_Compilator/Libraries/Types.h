@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+typedef uint8_t bool;
+
 typedef enum {
     TYPE_INT,
     TYPE_CHAR,
@@ -12,20 +14,37 @@ typedef enum {
     TYPE_BOOL
 } Type;
 
+/**
+ * the union of value which can be store the value of every type 
+ */
 typedef union Value {
     int32_t int_value;
-    uint8_t bool_value;
+    bool bool_value;
     char char_value;
-    char* string_value;
     float float_value;
     double double_value;
 } Value;
 
+/**
+ * type of object
+ */
+typedef struct Object {
+    /**
+     * object name
+     * if object is cell in array - name equal NULL
+     */
+    char* object_name;
 
-typedef struct Variable {
-    char* variable_name;
-    Type variable_type;
-    Value variable_value;
-} Variable;
+    /**
+     * object type
+     */
+    Type object_type;
+
+    /**
+     * object value
+     * selected by type
+     */
+    Value object_value;
+} Object;
 
 #endif
