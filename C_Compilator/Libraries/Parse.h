@@ -9,7 +9,7 @@
 typedef unsigned long long line_n;
 
 /**
- * function which read code of input file
+ * function which read code from input file
  * 
  * @param input_file_name           input file name
  */
