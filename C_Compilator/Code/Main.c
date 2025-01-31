@@ -4,15 +4,12 @@
 
 int
 main(int argc, char** argv){
+
+    FILE* in = stdin;
     
-    /* here i test some function */
-    char* str = "H e l l o , w    o r l d !";
-    char* new_str = Delete_spaces(str);
+    length_n l = Get_length_of_word(in, -1, ' ');
 
-    fprintf(stdout, "%s\n%s\n", str, new_str);
-
-    free(new_str);
-    /* dont care */
+    printf("%zu", l);
 
     return 0;
 }

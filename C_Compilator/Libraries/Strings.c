@@ -27,43 +27,56 @@ Delete_spaces(const char* str){
 }
 
 char*
-Read_line_before_symbol_from_file(FILE* stream, char symbol, line_n line){
-    line_n read_line = 0;
-    fpos_t position = 0;
+Read_line_before_symbol_from_file(FILE* stream, char symbol){
+    length_n length_of_cur_line = Get_length_of_line(stream, symbol);
+    char* line_buffer = (char*)malloc((length_of_cur_line + 1) * sizeof(char));
     char c;
-    while(read_line != line && (c = getc(stream)) != EOF){
-        if(c == '\n')
-            ++read_line;
+    strsize_t index = 0;
 
-        ++position;
+    while(c != EOF && c != symbol){
+        c = getc(stream);
+        line_buffer[index++] = c;
+    }
+    line_buffer[index] = '\0';
+
+    fseek(stream, length_of_cur_line + 1, SEEK_CUR);
+
+    return line_buffer;
+}
+
+char**
+Read_line_fron_file_before_symbol_and_return_words(FILE* stream, char* symbol);
+
+length_n
+Get_length_of_line(FILE* stream, char symbol){
+    char c;
+    length_n length = 0;
+    while(c != EOF && c != symbol){
+        c = getc(stream);
+        ++length;
     }
 
-    if(read_line != line){
-        ErrorStruct* error = CreateError("Readed lines not equal point lines", -1);
-        PrintError(error);
-        exit(1);
-    }
-
-    fseek(stream, position, SEEK_SET);
-
-    length_n length_of_cur_line = Get_length_of_line(stream, position);
-    char* buffer = (char*)malloc((length_of_cur_line + 1) * sizeof(char));
-    length_n index = 0;
-
-    while((c = getc(stream)) != EOF && (c != getc(stream)) != '\n')
-        buffer[index++] = c;
-
-    return buffer;
+    return length;
 }
 
 length_n
-Get_length_of_line(FILE* stream, fpos_t offset){
-    fseek(stream, offset, SEEK_SET);
-    length_n length_of_line = 0;
-    char c;
+Get_length_of_word(FILE* stream, strfpos_t offset, char separator){
+    if(offset == -1)
+        fseek(stream, 0, SEEK_SET);
+    else if(offset == -2)
+        fseek(stream, 0, SEEK_END);
+    else
+        fseek(stream, offset, SEEK_CUR);
 
-    while((c = getc(stream)) != EOF && (c != getc(stream)) != '\n')
-        ++length_of_line;
-    
-    return length_of_line;
+    char c = getc(stream);;
+    length_n length = 0;
+
+    while(c != EOF && c != separator){
+        ++length;
+        c = getc(stream);
+    }
+
+    fseek(stream, -offset, SEEK_CUR);
+
+    return length;
 }
