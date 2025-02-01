@@ -61,7 +61,29 @@ Get_length_of_line(FILE* stream, char symbol);
  * 
  * @return              length of readed word
  */
-length_n
+strsize_t
 Get_length_of_word(FILE* stream, strfpos_t offset, char separator);
+
+/**
+ * calculate words count
+ * 
+ * @param stream        the file stream
+ * @param separator     the separators between words
+ * 
+ * @return              words count
+ */
+length_n
+Count_of_words_from_stream(FILE* stream, char separator);
+
+/**
+ * calculate words count and its length
+ * 
+ * @param stream
+ * @param separator
+ * 
+ * @return              array with length of every words in stream
+ */
+length_n*
+Get_lengths_of_words(FILE* stream, char separator);
 
 #endif
