@@ -20,6 +20,16 @@ char*
 Delete_spaces(const char* str);
 
 /**
+ * delete extra space. it need for accurate count of words
+ * 
+ * @param str           the string where need to delete extra spaces
+ * 
+ * @return              string without extra spaces 
+ */
+char*
+Delete_extra_space(char* str);
+
+/**
  * read line from file stream until the point symbol is encountered
  * 
  * @param stream        the file stream
@@ -56,25 +66,24 @@ Get_length_of_line(FILE* stream, char symbol);
 /**
  * calculate length of word from file stream
  * 
- * @param stream        the file stream
- * @param offset        offset on which place the needed word
+ * @param line          line where need to read a word
  * @param separator     the separators between words
  * 
  * @return              length of readed word
  */
 strsize_t
-Get_length_of_word(FILE* stream, strfpos_t offset, char separator);
+Get_length_of_word(char* line, char separator);
 
 /**
  * calculate words count
  * 
- * @param stream        the file stream
+ * @param line          line where need to count a words
  * @param separator     the separators between words
  * 
  * @return              words count
  */
 length_n
-Count_of_words_in_stream(FILE* stream, char separator);
+Count_of_words_in_line(char* line, char separator);
 
 /**
  * calculate words count and its length
