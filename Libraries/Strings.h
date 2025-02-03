@@ -27,7 +27,7 @@ Delete_spaces(const char* str);
  * @return              string without extra spaces 
  */
 char*
-Delete_extra_space(char* str);
+Delete_extra_spaces(char* str);
 
 /**
  * read line from file stream until the point symbol is encountered
@@ -43,14 +43,13 @@ Read_line_before_symbol_from_file(FILE* stream, char symbol);
 /**
  * the same as the Read_line_before_symbol_from_file function, but return a list of readed words from this line
  * 
- * @param stream        the file stream
- * @param symbol        the symbol up to which need to read
+ * @param line          line which need to divide
  * @param separator     the separators between words
  * 
  * @return              the list of readed words
  */
 char**
-Read_line_from_file_before_symbol_and_return_words(FILE* stream, char symbol, char separator);
+Divide_line_into_words(char* line, char separator);
 
 /**
  * calculate length of line from file stream
@@ -61,13 +60,23 @@ Read_line_from_file_before_symbol_and_return_words(FILE* stream, char symbol, ch
  * @return              length of readed line
  */
 length_n
-Get_length_of_line(FILE* stream, char symbol);
+Get_length_of_line_from_stream(FILE* stream, char symbol);
+
+/**
+ * calculate length of line
+ * 
+ * @param line          line whose length need to calculate
+ * 
+ * @return              length of line
+ */
+length_n
+Get_length_of_line(char* line);
 
 /**
  * calculate length of word from file stream
  * 
  * @param line          line where need to read a word
- * @param separator     the separators between words
+ * @param separator     separators between words
  * 
  * @return              length of readed word
  */
@@ -78,7 +87,7 @@ Get_length_of_word(char* line, char separator);
  * calculate words count
  * 
  * @param line          line where need to count a words
- * @param separator     the separators between words
+ * @param separator     separators between words
  * 
  * @return              words count
  */
@@ -88,12 +97,12 @@ Count_of_words_in_line(char* line, char separator);
 /**
  * calculate words count and its length
  * 
- * @param stream
- * @param separator
+ * @param line          line where need read words and count its lengths
+ * @param separator     separators between words
  * 
  * @return              array with length of every words in stream
  */
-length_n*
-Get_lengths_of_words(FILE* stream, char separator);
+strsize_t*
+Get_lengths_of_words(char* line, char separator);
 
 #endif
