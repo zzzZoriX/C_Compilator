@@ -60,17 +60,7 @@ Divide_line_into_words(char* line, char separator);
  * @return              length of readed line
  */
 length_n
-Get_length_of_line_from_stream(FILE* stream, char symbol);
-
-/**
- * calculate length of line
- * 
- * @param line          line whose length need to calculate
- * 
- * @return              length of line
- */
-length_n
-Get_length_of_line(char* line);
+Get_length_of_line(FILE* stream, char symbol);
 
 /**
  * calculate length of word from file stream

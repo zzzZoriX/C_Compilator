@@ -59,7 +59,7 @@ Delete_extra_spaces(char* str) {
 
 char*
 Read_line_before_symbol_from_file(FILE* stream, char symbol){
-    length_n length_of_cur_line = Get_length_of_line_from_stream(stream, symbol);
+    length_n length_of_cur_line = Get_length_of_line(stream, symbol);
     
     char* line_buffer = (char*)malloc((length_of_cur_line + 1) * sizeof(char));
     if(!line_buffer){
@@ -127,7 +127,7 @@ Divide_line_into_words(char* line, char separator){
 }
 
 length_n
-Get_length_of_line_from_stream(FILE* stream, char symbol){
+Get_length_of_line(FILE* stream, char symbol){
     strfpos_t save_position = ftell(stream);
     char c;
     length_n length = 0;

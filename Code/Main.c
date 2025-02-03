@@ -2,11 +2,13 @@
 #include "C:/C_Compilator/Libraries/ErrorHandler.h"
 #include "C:/C_Compilator/Libraries/Strings.h"
 
+#define TEST_PATH "c:/c_compilator/tests/test1.txt"
+
 int
 main(int argc, char** argv){
 
     /* test something */
-    FILE* fpt = fopen("c:/c_compilator/tests/test1.txt", "r");
+    FILE* fpt = fopen(TEST_PATH, "r");
     
     char* line = Read_line_before_symbol_from_file(fpt, EOF);
     line = Delete_extra_spaces(line);
