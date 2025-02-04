@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "ErrorHandler.h"
+
+line_n lines = 0;
 
 ErrorStruct*
 CreateError(const char* error_text, err_line error_line, err_symbol error_symbol){
@@ -20,7 +19,7 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
 
 void
 PrintError(ErrorStruct* error){
-    fprintf(stderr, "%lld.%lld: %s\nToken - %d\n", error->error_line, error->error_symbol ,error->error_message);
+    fprintf(stderr, "%lld.%lld | %s\nToken - %d\n", error->error_line, error->error_symbol ,error->error_message);
     RealeaseError(error);
 }
 

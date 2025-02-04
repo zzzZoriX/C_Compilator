@@ -1,7 +1,12 @@
 #ifndef ERRORHANDLER_H
 #define ERRORHANDLER_H
 
-#include "C:\\C_Compilator\\Libraries\\Tokens.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "Tokens.h"
+#include "Strings.h"
 
 
 typedef unsigned long long err_line, err_symbol;

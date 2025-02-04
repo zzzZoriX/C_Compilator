@@ -10,12 +10,14 @@ main(int argc, char** argv){
     /* test something */
     FILE* fpt = fopen(TEST_PATH, "r");
     
-    char* line = Read_line_before_symbol_from_file(fpt, EOF);
-    line = Delete_extra_spaces(line);
-    length_n c = Count_of_words_in_line(line, ' ');
-    length_n* l = Get_lengths_of_words(line, ' ');
+    char* line;
+    Read_line_before_symbol_from_file(&line, fpt, EOF);
+    Delete_extra_spaces(&line, line);
+    length_n c;
+    Count_of_words_in_line(&c, line, ' ');
 
-    char** words = Divide_line_into_words(line, ' ');
+    char** words;
+    Divide_line_into_words(&words, line, ' ');
 
     for(length_n i = 0; i < c; ++i)
         printf("%s\n", words[i]);
