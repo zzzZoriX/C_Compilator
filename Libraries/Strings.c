@@ -1,7 +1,7 @@
 #include "Strings.h"
 #include "ErrorHandler.h"
 
-extern line_n lines;
+extern line_n current_parse_line;
 
 ErrorStruct*
 Delete_spaces(char** buffer_p, const char* str){
@@ -70,21 +70,20 @@ Read_line_before_symbol_from_file(char** line_p, FILE* stream, char symbol){
     
     char* line_buffer = (char*)malloc((length_of_cur_line + 1) * sizeof(char));
     if(!line_buffer){
-        fprintf(stderr, "Memory allocating failed for read line\n");
-        exit(1);
+        ErrorStruct* error = CreateError("Memory allocating failed for read line\n", current_parse_line, -1);
+        return error;
     }
 
     char c;
     strsize_t index = 0;
 
     while((c = getc(stream)) != EOF && c != symbol){
-        if(c == '\n') ++lines;
         line_buffer[index++] = c;
     }
 
     line_buffer[index] = '\0';
 
-    fseek(stream, length_of_cur_line + 1, SEEK_CUR);
+    fseek(stream, 1, SEEK_CUR);
 
     *line_p = line_buffer;
 
@@ -102,7 +101,7 @@ Divide_line_into_words(char*** words_buffer_p, char* line, char separator){
     Get_lengths_of_words(&lengths_of_words, line, separator);
     char** words = (char**)malloc(count_of_words * sizeof(char*));
     if(!words){
-        ErrorStruct* error = CreateError("Memory allocating failed for words\n", lines, -1);
+        ErrorStruct* error = CreateError("Memory allocating failed for words\n", current_parse_line, -1);
         return error;
     } 
 
@@ -110,7 +109,7 @@ Divide_line_into_words(char*** words_buffer_p, char* line, char separator){
     for(length_n i = 0; i < count_of_words; ++i){
         words[i] = (char*)malloc((lengths_of_words[index++] + 1) * sizeof(char));
         if(!words[i]){
-            ErrorStruct* error = CreateError("Memory allocating failed for word in line\n", lines, -1);
+            ErrorStruct* error = CreateError("Memory allocating failed for word in line\n", current_parse_line, -1);
             free(words[i]);
             free(words);
             return error;
@@ -197,7 +196,7 @@ Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator){
     char* save_pointer_position = line;
     strsize_t* lengths_of_words = (strsize_t*)calloc(count_of_words, sizeof(strsize_t));
     if(!lengths_of_words){
-        ErrorStruct* error = CreateError("Memory allocating failed for lengths of words", lines, -1);
+        ErrorStruct* error = CreateError("Memory allocating failed for lengths of words", current_parse_line, -1);
         return error;
     }
 

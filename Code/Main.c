@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "C:/C_Compilator/Libraries/ErrorHandler.h"
-#include "C:/C_Compilator/Libraries/Strings.h"
+#include "./Include/ErrorHandler.h"
+#include "./Include/Strings.h"
 
 #define TEST_PATH "c:/c_compilator/tests/test1.txt"
 

@@ -17,6 +17,14 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
     return error;
 }
 
+void*
+CheckToError(void* error){
+    if(error){
+        PrintError(error);
+        exit(1);
+    }
+}
+
 void
 PrintError(ErrorStruct* error){
     fprintf(stderr, "%lld.%lld | %s\nToken - %d\n", error->error_line, error->error_symbol ,error->error_message);
