@@ -1,0 +1,38 @@
+#include "Parse.h"
+
+line_n current_parse_line = 0;
+
+void
+Read_file(const char* input_file_name){
+    FILE* input_file_stream = fopen(input_file_name, 'r');
+    char * line, ** words;
+    ErrorStruct* result;
+    pthread_t error_check_thread;
+
+    pthread_create(
+        &error_check_thread,
+        NULL,
+        CheckToError,
+        result
+    );
+
+    result = Read_line_before_symbol_from_file(&line, input_file_stream, SEPARATOR);
+    while(line != NULL){
+        result = Delete_extra_spaces(&line, line);
+        result = Divide_line_into_words(&words, line, SEPARATOR);
+
+
+
+        result = Read_line_before_symbol_from_file(&line, input_file_stream, SEPARATOR);
+        ++current_parse_line;
+    }
+}
+
+ErrorStruct*
+Parse(Token** tokens_p, const char** words, length_n count_of_words){
+    Token* tokens = (Token*)calloc(count_of_words, sizeof(Token));
+    if(!tokens)
+        return CreateError("Memory allocating failed for tokens\n", current_parse_line, -1);
+
+    
+}

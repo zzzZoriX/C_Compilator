@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "errorhandler.h": "c",
+        "random": "cpp"
+    }
+}
