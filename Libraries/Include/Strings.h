@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "./Include/ErrorHandler.h"
+#include "ErrorHandler.h"
 
 typedef unsigned long long symbol_n, length_n, strsize_t;
 typedef long line_n, strfpos_t;

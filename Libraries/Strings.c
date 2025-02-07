@@ -1,5 +1,4 @@
-#include "Strings.h"
-#include "ErrorHandler.h"
+#include "./Include/Strings.h"
 
 extern line_n current_parse_line;
 

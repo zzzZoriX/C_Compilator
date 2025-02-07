@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "./Include/Tokens.h"
-#include "./Include/Strings.h"
+#include "Tokens.h"
+#include "Strings.h"
 
 
 typedef unsigned long long err_line, err_symbol;
