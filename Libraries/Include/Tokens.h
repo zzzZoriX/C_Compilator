@@ -2,8 +2,10 @@
 #define TOKENS_H
 
 #include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
 
-#include "./Include/Types.h"
+#include "Types.h"
 
 typedef enum TokenType {
     TOK_INT,
@@ -13,24 +15,29 @@ typedef enum TokenType {
     TOK_IDENT,
 
     TOK_ASSIGN,
-    TOK_SEMIC
+    TOK_SEMIC,
+
+    TOK_NULL
 } TokenType;
 
 typedef struct Token {
     TokenType type;
+    char* name;
     Value value;
 } Token;
 
+Token NULL_TOKEN = {TOK_NULL, NULL, {0}};
+
 /**
- * function which define a token type by word
+ * function which define a token by word
  * 
- * @param last_token_type           last token type
+ * @param last_token                last token
  * @param word                      word according to which will be defined token type
  * 
- * @return                          word token type
+ * @return                          variable pointer or token pointer
  */
-TokenType
-Define_token_type(TokenType last_token_type, const char* word);
+Token*
+Define_token(Token* last_token, const char* word);
 
 /**
  * check to token type is data type

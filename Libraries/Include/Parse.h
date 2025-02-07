@@ -4,14 +4,12 @@
 #include <stdio.h>
 #include <pthread.h>
 
-#include "./Include/Tokens.h"
-#include "./Include/Types.h"
-#include "./Include/Strings.h"
-#include "./Include/ErrorHandler.h"
+#include "Tokens.h"
+#include "Types.h"
+#include "Strings.h"
+#include "ErrorHandler.h"
 
 #define SEPARATOR ' '
-
-typedef unsigned long long line_n;
 
 /**
  * function which read code of input file
@@ -22,7 +20,7 @@ void
 Read_file(const char* input_file_name);
 
 /**
- * the parse function
+ * the lexer function
  * 
  * @param tokens_p                  line translated to tokens
  * @param words                     words from parsing line
@@ -31,7 +29,7 @@ Read_file(const char* input_file_name);
  * @return                          error object. if error was happened - return object, else - return null
  */
 ErrorStruct*
-Parse(Token** tokens_p, const char** words, length_n count_of_words);
+Lexer(Token** tokens_p, const char** words, length_n count_of_words);
 
 
 #endif

@@ -1,4 +1,4 @@
-#include "ErrorHandler.h"
+#include "./include/ErrorHandler.h"
 
 line_n lines = 0;
 

@@ -1,15 +1,18 @@
 #include "./Include/Tokens.h"
 
-TokenType
-Define_token_type(TokenType last_token_type, const char* word){
-    if(strcmp(word, "int") == 0)            return TOK_INT;
-    else if(strcmp(word, "char") == 0)      return TOK_CHAR;
-    else if(strcmp(word, "float") == 0)     return TOK_FLOAT;
+Token*
+Define_token(Token* last_token, const char* word){
+    Token* token = (Token*)malloc(sizeof(Token));
+    if(!token) return NULL;
 
-    else if(isDataType(last_token_type) && isAlpha(word)) return TOK_IDENT;
+    if(strcmp(word, "int") == 0)            { token->type = TOK_INT, token->name = NULL, token->value = (Value){0}; }
+    else if(strcmp(word, "char") == 0)      { token->type = TOK_CHAR, token->name = NULL, token->value = (Value){0}; }
+    else if(strcmp(word, "float") == 0)     { token->type = TOK_FLOAT, token->name = NULL, token->value = (Value){0}; }
 
-    else if(word == '=')                    return TOK_ASSIGN;
-    else if(word == ';')                    return TOK_SEMIC;
+    else if(isDataType(last_token->type) && isAlpha(word)) { token->type = TOK_IDENT, token->name = strdup(word), token->value = (Value){0}; }
+
+    else if(*word == '=')                    { token->type = TOK_ASSIGN, token->name = NULL, token->value = (Value){0}; }
+    else if(*word == ';')                    { token->type = TOK_SEMIC, token->name = NULL, token->value = (Value){0}; }
 }
 
 bool

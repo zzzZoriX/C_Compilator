@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "./Include/ErrorHandler.h"
-#include "./Include/Strings.h"
+#include "c:/c_compilator/libraries/include/parse.h"
 
 #define TEST_PATH "c:/c_compilator/tests/test1.txt"
 
@@ -10,22 +9,16 @@ main(int argc, char** argv){
     /* test something */
     FILE* fpt = fopen(TEST_PATH, "r");
     
-    char* line;
-    Read_line_before_symbol_from_file(&line, fpt, EOF);
-    Delete_extra_spaces(&line, line);
-    length_n c;
-    Count_of_words_in_line(&c, line, ' ');
+    char* words[] = {"int", "a", ";"};
+    Token* tokens;
+    Lexer(&tokens, (const char**)words, 3);
 
-    char** words;
-    Divide_line_into_words(&words, line, ' ');
+    for(int i = 0; i < 3; ++i){
+        printf("%d ", tokens[i]);
+    }
 
-    for(length_n i = 0; i < c; ++i)
-        printf("%s\n", words[i]);
-
-    for(length_n i = 0; i < c; ++i)
-        free(words[i]);
-
-    free(words);
+    free(tokens[1].name);
+    free(tokens);
 
     fclose(fpt);
     /* ... */
