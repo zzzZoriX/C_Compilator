@@ -2,19 +2,19 @@
 
 line_n current_parse_line = 0;
 Token empty_token = NULL_TOKEN;
+extern ErrorStruct* result;
 
 void
 Read_file(const char* input_file_name){
     FILE* input_file_stream = fopen(input_file_name, "r");
     char * line, ** words;
-    ErrorStruct* result;
     pthread_t error_check_thread;
 
     pthread_create(
         &error_check_thread,
         NULL,
         CheckToError,
-        result
+        NULL
     );
 
     result = Read_line_before_symbol_from_file(&line, input_file_stream, SEPARATOR);
@@ -22,7 +22,7 @@ Read_file(const char* input_file_name){
         result = Delete_extra_spaces(&line, line);
         result = Divide_line_into_words(&words, line, SEPARATOR);
 
-
+        
 
         result = Read_line_before_symbol_from_file(&line, input_file_stream, SEPARATOR);
         ++current_parse_line;

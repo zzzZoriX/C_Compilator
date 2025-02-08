@@ -1,6 +1,7 @@
 #include "./include/ErrorHandler.h"
 
 line_n lines = 0;
+ErrorStruct* result = NULL;
 
 ErrorStruct*
 CreateError(const char* error_text, err_line error_line, err_symbol error_symbol){
@@ -17,10 +18,10 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
     return error;
 }
 
-void*
-CheckToError(void* error){
-    if(error){
-        PrintError(error);
+void
+CheckToError(){
+    if(result){
+        PrintError(result);
         exit(1);
     }
 }

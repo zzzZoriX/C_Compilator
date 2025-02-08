@@ -13,7 +13,6 @@ struct ErrorStruct;
 
 typedef unsigned long long err_line, err_symbol;
 
-
 /**
  * the struct of error which will be print when the error occured 
  */
@@ -50,10 +49,10 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
 /**
  * check to an error has been happined
  * 
- * @param error         error object which need to check
+ * use lib-variable(defined in ErrorHandler.c) as results of functions
  */
-void*
-CheckToError(void* error);
+void
+CheckToError();
 
 /**
  * print the error
