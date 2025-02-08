@@ -71,5 +71,4 @@ PrintError(ErrorStruct* error);
 void
 RealeaseError(ErrorStruct* error);
 
-
 #endif

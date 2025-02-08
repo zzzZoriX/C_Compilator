@@ -60,7 +60,6 @@ bool
 isAlpha(const char* str);
 
 
-
 /* for variables / objects */
 /**
  * validate symbol for variable / object name

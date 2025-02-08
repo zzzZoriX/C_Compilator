@@ -31,5 +31,4 @@ Read_file(const char* input_file_name);
 ErrorStruct*
 Lexer(Token** tokens_p, const char** words, length_n count_of_words);
 
-
 #endif
