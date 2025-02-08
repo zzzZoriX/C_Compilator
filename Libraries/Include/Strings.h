@@ -19,7 +19,7 @@ typedef long line_n, strfpos_t;
  * 
  * @return              error object. if error was happened - return object, else - return null
  */
-ErrorStruct*
+struct ErrorStruct*
 Delete_spaces(char** buffer_p, const char* str);
 
 /**
@@ -30,7 +30,7 @@ Delete_spaces(char** buffer_p, const char* str);
  * 
  * @return              error object. if error was happened - return object, else - return null 
  */
-ErrorStruct*
+struct ErrorStruct*
 Delete_extra_spaces(char** buffer_p, char* str);
 
 /**
@@ -42,7 +42,7 @@ Delete_extra_spaces(char** buffer_p, char* str);
  * 
  * @return              error object. if error was happened - return object, else - return null
  */
-ErrorStruct*
+struct ErrorStruct*
 Read_line_before_symbol_from_file(char** line_p, FILE* stream, char symbol);
 
 /**
@@ -54,7 +54,7 @@ Read_line_before_symbol_from_file(char** line_p, FILE* stream, char symbol);
  * 
  * @return              error object. if error was happened - return object, else - return null
  */
-ErrorStruct*
+struct ErrorStruct*
 Divide_line_into_words(char*** words_buffer_p, char* line, char separator);
 
 /**
@@ -66,7 +66,7 @@ Divide_line_into_words(char*** words_buffer_p, char* line, char separator);
  * 
  * @return              error object. if error was happened - return object, else - return null
  */
-ErrorStruct*
+struct ErrorStruct*
 Get_length_of_line(length_n* length_p, FILE* stream, char symbol);
 
 /**
@@ -78,7 +78,7 @@ Get_length_of_line(length_n* length_p, FILE* stream, char symbol);
  * 
  * @return              error object. if error was happened - return object, else - return null
  */
-ErrorStruct*
+struct ErrorStruct*
 Get_length_of_word(strsize_t* length_p, char* line, char separator);
 
 /**
@@ -90,7 +90,7 @@ Get_length_of_word(strsize_t* length_p, char* line, char separator);
  * 
  * @return              error object. if error was happened - return object, else - return null
  */
-ErrorStruct*
+struct ErrorStruct*
 Count_of_words_in_line(length_n* count_p, char* line, char separator);
 
 /**
@@ -102,7 +102,7 @@ Count_of_words_in_line(length_n* count_p, char* line, char separator);
  * 
  * @return              error object. if error was happened - return object, else - return null
  */
-ErrorStruct*
+struct ErrorStruct*
 Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator);
 
 #endif

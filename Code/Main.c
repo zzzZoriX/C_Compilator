@@ -9,13 +9,9 @@ main(int argc, char** argv){
     /* test something */
     FILE* fpt = fopen(TEST_PATH, "r");
     
-    char* words[] = {"int", "a", ";"};
+    char* words[] = {"int", "a", ";", "char", "float", "="};
     Token* tokens;
-    Lexer(&tokens, (const char**)words, 3);
-
-    for(int i = 0; i < 3; ++i){
-        printf("%d ", tokens[i]);
-    }
+    Lexer(&tokens, (const char**)words, 6);
 
     free(tokens[1].name);
     free(tokens);

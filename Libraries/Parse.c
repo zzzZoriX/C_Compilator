@@ -1,6 +1,7 @@
 #include "./Include/Parse.h"
 
 line_n current_parse_line = 0;
+Token empty_token = NULL_TOKEN;
 
 void
 Read_file(const char* input_file_name){
@@ -36,7 +37,7 @@ Lexer(Token** tokens_p, const char** words, length_n count_of_words){
         return CreateError("Memory allocating failed for tokens\n", current_parse_line, -1);
 
     Token* current_token;
-    current_token = Define_token(&NULL_TOKEN, words[words_index++]), ++token_index;
+    current_token = Define_token(&empty_token, words[words_index++]), ++token_index;
     while(words_index != count_of_words){
         tokens[token_index] = *current_token;
         current_token = Define_token(&(tokens[token_index++]), words[words_index++]);

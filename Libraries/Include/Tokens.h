@@ -26,7 +26,7 @@ typedef struct Token {
     Value value;
 } Token;
 
-Token NULL_TOKEN = {TOK_NULL, NULL, {0}};
+#define NULL_TOKEN {TOK_NULL, NULL, {0}}
 
 /**
  * function which define a token by word
@@ -58,5 +58,28 @@ isDataType(TokenType token_type);
  */
 bool
 isAlpha(const char* str);
+
+
+
+/* for variables / objects */
+/**
+ * validate symbol for variable / object name
+ * 
+ * @param symbol                    symbol which need to validate
+ * 
+ * @return                          1 or 0 (true of false)
+ */
+bool
+isValidSymbol(const char symbol);
+
+/**
+ * checking geted name for can be this a name for object or variable 
+ * 
+ * @param name                      name which will be checked
+ * 
+ * @return                          1 or 0 (true or false)
+ */
+bool
+isObjVarName(const char* name);
 
 #endif
