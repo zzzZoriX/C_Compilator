@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "c:/c_compilator/libraries/include/parse.h"
+#include "c:/c_compilator/libraries/include/Interpritator.h"
 
 #define TEST_PATH "c:/c_compilator/tests/test1.txt"
 

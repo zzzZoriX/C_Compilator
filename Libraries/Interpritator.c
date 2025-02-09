@@ -1,4 +1,4 @@
-#include "./Include/Parse.h"
+#include "./Include/Interpritator.h"
 
 line_n current_parse_line = 0;
 Token empty_token = NULL_TOKEN;
@@ -9,6 +9,8 @@ Read_file(const char* input_file_name){
     FILE* input_file_stream = fopen(input_file_name, "r");
     char * line, ** words;
     pthread_t error_check_thread;
+    Token* tokens;
+    length_n count_of_words;
 
     pthread_create(
         &error_check_thread,
@@ -21,8 +23,9 @@ Read_file(const char* input_file_name){
     while(line != NULL){
         result = Delete_extra_spaces(&line, line);
         result = Divide_line_into_words(&words, line, SEPARATOR);
+        result = Count_of_words_in_line(&count_of_words, line, SEPARATOR);
 
-        
+        result = Lexer(&tokens, words, count_of_words);
 
         result = Read_line_before_symbol_from_file(&line, input_file_stream, SEPARATOR);
         ++current_parse_line;
@@ -44,6 +47,13 @@ Lexer(Token** tokens_p, const char** words, length_n count_of_words){
     }
 
     *tokens_p = tokens;
+
+    return NULL;
+}
+
+ErrorStruct*
+Parser(Token* tokens){
+    
 
     return NULL;
 }

@@ -28,26 +28,4 @@ typedef union Value {
     double double_value;
 } Value;
 
-/**
- * type of object
- */
-typedef struct Object {
-    /**
-     * object name
-     * if object is cell in array - name equal NULL
-     */
-    char* object_name;
-
-    /**
-     * object type
-     */
-    Type object_type;
-
-    /**
-     * object value
-     * selected by type
-     */
-    Value object_value;
-} Object;
-
 #endif

@@ -1,5 +1,5 @@
-#ifndef PARSE_H
-#define PARSE_H
+#ifndef INTERPRITATOR_H
+#define INTERPRITATOR_H
 
 #include <stdio.h>
 #include <pthread.h>
@@ -30,5 +30,15 @@ Read_file(const char* input_file_name);
  */
 ErrorStruct*
 Lexer(Token** tokens_p, const char** words, length_n count_of_words);
+
+/**
+ * the parser function
+ * 
+ * @param tokens                    tokens by which parser will be does something
+ * 
+ * @return                          error object. if error was happened - return object, else - return null
+ */
+ErrorStruct*
+Parser(Token* tokens);
 
 #endif
