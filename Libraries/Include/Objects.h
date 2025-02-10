@@ -1,6 +1,9 @@
 #ifndef OBJECTS_H
 #define OBJECTS_H
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "Types.h"
 
 /**
@@ -27,13 +30,13 @@ typedef struct Object {
     /**
      * pointer to next object
      */
-    Object* next_object;
+    struct Object* next_object;
 } Object;
 
 /**
  * struct for better work with objects
  */
-typedef struct HeadObject {
+typedef struct HeadOfObject {
     /**
      * pointer to first object
      */
@@ -52,6 +55,39 @@ typedef struct HeadObject {
 
 
 /**
+ * release object
+ * 
+ * @param obj                   object which need to release
+ */
+static inline void
+Release_obj(Object* obj){
+    free(obj->object_name);
+    free(obj);
+}
+
+
+/**
+ * initialize head of objects
+ * 
+ * @return                      initialized head of objects
+ */
+HeadObject*
+Init_head_obj();
+
+/**
+ * initialize object
+ * 
+ * @param obj_name              name of creating object
+ * @param obj_type              type of creating object
+ * @param obj_value             value of the creating object
+ * 
+ * @return                      initialized object
+ */
+Object*
+Init_obj(const char* obj_name, Type obj_type, Value obj_value);
+
+
+/**
  * add object to linked list
  * 
  * @param obj                   object which need to add
@@ -59,5 +95,14 @@ typedef struct HeadObject {
  */
 void
 Add_obj(Object* obj, HeadObject* head_obj);
+
+/**
+ * delete object from linked list
+ * 
+ * @param obj                   object which need to delete
+ * @param head                  head of objects
+ */
+void
+Delete_obj(Object* obj, HeadObject* head);
 
 #endif

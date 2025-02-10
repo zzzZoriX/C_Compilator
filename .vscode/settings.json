@@ -2,6 +2,7 @@
     "files.associations": {
         "errorhandler.h": "c",
         "random": "cpp",
-        "tokens.h": "c"
+        "tokens.h": "c",
+        "objects.h": "c"
     }
 }
