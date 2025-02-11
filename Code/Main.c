@@ -18,11 +18,9 @@ main(int argc, char** argv){
     Add_obj(a, h);
     Add_obj(b, h);
 
-    printf("%ld\n", h->count_of_objects);
+    Object* r = Find_obj("bb", h);
 
-    Delete_obj(b, h);
-
-    printf("%ld\n", h->count_of_objects);
+    printf("%s\n", r->object_name);
     /* ... */
 
     return 0;

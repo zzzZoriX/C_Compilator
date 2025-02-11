@@ -65,6 +65,17 @@ Release_obj(Object* obj){
     free(obj);
 }
 
+/**
+ * searching the object by name
+ * 
+ * @param name                  name by which will be search the object
+ * @param head                  head of objects
+ * 
+ * @return                      found object
+ */
+Object*
+Find_obj(const char* name, HeadObject* head);
+
 
 /**
  * initialize head of objects

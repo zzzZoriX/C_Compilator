@@ -1,5 +1,15 @@
 #include "./Include/Objects.h"
 
+Object*
+Find_obj(const char* name, HeadObject* head){
+    Object* current_obj = head->first_object;
+    while(current_obj != NULL && strcmp(current_obj->object_name, name) != 0)
+        current_obj = current_obj->next_object;
+
+    if(current_obj == NULL) return NULL;
+    return current_obj;
+}
+
 HeadObject*
 Init_head_obj(){
     HeadObject* head = (HeadObject*)malloc(sizeof(HeadObject));
