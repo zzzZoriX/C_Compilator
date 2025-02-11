@@ -8,6 +8,7 @@
 #include "Types.h"
 #include "Strings.h"
 #include "ErrorHandler.h"
+#include "Objects.h"
 
 #define SEPARATOR ' '
 

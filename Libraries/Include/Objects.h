@@ -65,6 +65,18 @@ Release_obj(Object* obj){
     free(obj);
 }
 
+static inline void
+Release_head_obj(HeadObject* head){
+    Object* current_obj = head->first_object->next_object;
+    Object* last_obj = head->first_object;
+    while(last_obj != NULL){
+        Release_obj(last_obj);
+        last_obj = current_obj;
+        if(current_obj != NULL) current_obj = current_obj->next_object;
+    }
+    free(head);
+}
+
 /**
  * searching the object by name
  * 

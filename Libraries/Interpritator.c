@@ -52,17 +52,21 @@ Lexer(Token** tokens_p, const char** words, length_n count_of_words){
 }
 
 ErrorStruct*
-Parser(Token* tokens){
+Parser(Token* tokens, HeadObject* head){
 
-    Type obj_t;
-    char* obj_n;
-    Value obj_v;
+    Type obj_t = TYPE_UNDEF;
+    char* obj_n = NULL;
+    Value obj_v = (Value){0};
 
     size_t index = 0;
     unsigned long count_of_tokens = Get_count_of_tokens(tokens);
     while(index != count_of_tokens){
-        if(isDataType(tokens[index++].type)) obj_t = tokens[index].type;
+        if( isDataType(tokens[index++].type ))      obj_t = Define_type(tokens[index].type);
+        if(isObjVarName(tokens[index++].name))      obj_n = strdup(tokens[index].name);
     }
+
+    Object* new_obj = Init_obj(obj_n, obj_t, obj_v);
+    Add_obj(new_obj, head);
 
     return NULL;
 }
