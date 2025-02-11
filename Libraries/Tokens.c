@@ -17,6 +17,17 @@ Define_token(Token* last_token, const char* word){
     else if(*word == ';')                    { printf("semic\n"), token->type = TOK_SEMIC, token->name = NULL, token->value = (Value){0}; }
 }
 
+Type
+Define_type(TokenType token_type){
+    switch(token_type){
+        case TOK_CHAR: return TYPE_CHAR;
+        case TOK_FLOAT: return TYPE_FLOAT;
+        case TOK_INT: return TYPE_INT;
+
+        default: return TYPE_UNDEF;
+    }
+}
+
 bool
 isDataType(TokenType token_type){
     if(

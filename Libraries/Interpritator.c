@@ -53,7 +53,16 @@ Lexer(Token** tokens_p, const char** words, length_n count_of_words){
 
 ErrorStruct*
 Parser(Token* tokens){
-    
+
+    Type obj_t;
+    char* obj_n;
+    Value obj_v;
+
+    size_t index = 0;
+    unsigned long count_of_tokens = Get_count_of_tokens(tokens);
+    while(index != count_of_tokens){
+        if(isDataType(tokens[index++].type)) obj_t = tokens[index].type;
+    }
 
     return NULL;
 }

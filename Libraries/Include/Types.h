@@ -14,7 +14,8 @@ typedef enum {
     TYPE_STRING,
     TYPE_FLOAT,
     TYPE_DOUBLE,
-    TYPE_BOOL
+    TYPE_BOOL,
+    TYPE_UNDEF
 } Type;
 
 /**

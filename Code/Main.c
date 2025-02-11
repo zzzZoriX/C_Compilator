@@ -8,19 +8,14 @@ int
 main(int argc, char** argv){
 
     /* test something */
-    FILE* fpt = fopen(TEST_PATH, "r");
+    //FILE* fpt = fopen(TEST_PATH, "r");
 
-    fclose(fpt);
-
-    HeadObject* h = Init_head_obj();
-    Object * a = Init_obj("aa", TYPE_INT, (Value){1}), * b = Init_obj("bb", TYPE_INT, (Value){1});
-
-    Add_obj(a, h);
-    Add_obj(b, h);
-
-    Object* r = Find_obj("bb", h);
-
-    printf("%s\n", r->object_name);
+    Token* t;
+    t->type = TOK_FLOAT;
+    t->name = "bb";
+    t->value = (Value){0};
+    Type type = Define_type(t->type);
+    printf("%d\n", type);
     /* ... */
 
     return 0;

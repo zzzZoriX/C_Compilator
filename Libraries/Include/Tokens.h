@@ -29,6 +29,18 @@ typedef struct Token {
 #define NULL_TOKEN {TOK_NULL, NULL, {0}}
 
 /**
+ * calculate count of tokens
+ * 
+ * @param tokens                    tokens array which length need to count
+ * 
+ * @return                          count of tokens
+ */
+static inline unsigned long
+Get_count_of_tokens(Token* tokens){
+    return sizeof(tokens) / sizeof(Token);
+}
+
+/**
  * function which define a token by word
  * 
  * @param last_token                last token
@@ -38,6 +50,16 @@ typedef struct Token {
  */
 Token*
 Define_token(Token* last_token, const char* word);
+
+/**
+ * function which define a type by token-type
+ * 
+ * @param token_type                token-type by which type will be defined
+ * 
+ * @return                          type
+ */
+Type
+Define_type(TokenType token_type);
 
 /**
  * check to token type is data type
