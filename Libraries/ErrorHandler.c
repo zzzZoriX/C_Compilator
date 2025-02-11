@@ -18,7 +18,7 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
     return error;
 }
 
-void
+void*
 CheckToError(){
     if(result){
         PrintError(result);

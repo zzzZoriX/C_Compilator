@@ -5,8 +5,7 @@ Token empty_token = NULL_TOKEN;
 extern ErrorStruct* result;
 
 void
-Read_file(const char* input_file_name){
-    FILE* input_file_stream = fopen(input_file_name, "r");
+Interpritator(FILE* input_file_stream, HeadObject* head){
     char * line, ** words;
     pthread_t error_check_thread;
     Token* tokens;
@@ -25,7 +24,8 @@ Read_file(const char* input_file_name){
         result = Divide_line_into_words(&words, line, SEPARATOR);
         result = Count_of_words_in_line(&count_of_words, line, SEPARATOR);
 
-        result = Lexer(&tokens, words, count_of_words);
+        result = Lexer(&tokens, (const char**)words, count_of_words);
+        result = Parser(tokens, head);
 
         result = Read_line_before_symbol_from_file(&line, input_file_stream, SEPARATOR);
         ++current_parse_line;

@@ -1,2 +1,1 @@
-as   df  a sd
-sdf sdf  s d k
+int a

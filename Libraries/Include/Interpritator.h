@@ -13,12 +13,13 @@
 #define SEPARATOR ' '
 
 /**
- * function which read code of input file
+ * interpritator function
  * 
- * @param input_file_name           input file name
+ * @param input_file_strem          a file stream
+ * @param head                      a head of objects
  */
 void
-Read_file(const char* input_file_name);
+Interpritator(FILE* input_file_stream, HeadObject* head);
 
 /**
  * the lexer function
@@ -36,10 +37,11 @@ Lexer(Token** tokens_p, const char** words, length_n count_of_words);
  * the parser function
  * 
  * @param tokens                    tokens by which parser will be does something
+ * @param head                      a head of objects
  * 
  * @return                          error object. if error was happened - return object, else - return null
  */
 ErrorStruct*
-Parser(Token* tokens);
+Parser(Token* tokens, HeadObject* head);
 
 #endif

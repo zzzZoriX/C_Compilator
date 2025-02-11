@@ -51,7 +51,7 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
  * 
  * use lib-variable(defined in ErrorHandler.c) as results of functions
  */
-void
+void*
 CheckToError();
 
 /**
