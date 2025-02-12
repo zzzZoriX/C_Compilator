@@ -88,7 +88,7 @@ Read_line_before_symbol_from_file(char** line_p, FILE* stream, char symbol){
         return NULL;
     }
 
-    fseek(stream, 1, SEEK_CUR);
+    //fseek(stream, 1, SEEK_CUR);
 
     *line_p = line_buffer;
 
