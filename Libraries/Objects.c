@@ -28,6 +28,11 @@ Init_obj(const char* obj_name, Type obj_type, Value obj_value){
     if(!obj) return NULL;
 
     obj->object_name = strdup(obj_name);
+    if(!obj->object_name){
+        free(obj);
+        fprintf(stderr, "Invalid object name\n");
+        return NULL;
+    }
     obj->object_type = obj_type;
     obj->object_value = obj_value;
     obj->next_object = NULL;

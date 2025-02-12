@@ -2,6 +2,7 @@
 #define OBJECTS_H
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "Types.h"
@@ -61,18 +62,32 @@ typedef struct HeadOfObject {
  */
 static inline void
 Release_obj(Object* obj){
-    free(obj->object_name);
+    if(!obj) return;
+    if(obj->object_name) free(obj->object_name);
     free(obj);
 }
 
+/**
+ * release head of objects
+ * 
+ * @param head                  head of objects which need to release
+ */
 static inline void
 Release_head_obj(HeadObject* head){
-    Object* current_obj = head->first_object->next_object;
-    Object* last_obj = head->first_object;
-    while(last_obj != NULL){
-        Release_obj(last_obj);
-        last_obj = current_obj;
-        if(current_obj != NULL) current_obj = current_obj->next_object;
+    if(!head) return;
+    if(head->count_of_objects == 1){
+        Release_obj(head->first_object);
+        free(head);
+        return;
+    }
+
+    Object* current_obj = head->first_object;
+    Object* next_obj = NULL;
+    
+    while(current_obj != NULL){
+        next_obj = current_obj->next_object;
+        Release_obj(current_obj);
+        current_obj = next_obj;
     }
     free(head);
 }

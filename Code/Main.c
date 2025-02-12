@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "c:/c_compilator/libraries/include/Interpritator.h"
 
-#define DEBUG 1
+#define DEBUG 0
 
 /*
     compile command
@@ -16,7 +16,7 @@ main(int argc, char** argv){
         exit(1);
     }
 
-    #ifdef DEBUG
+    #if DEBUG == 1
     fprintf(stdout, "Program start\n");
     #endif
 
@@ -30,9 +30,11 @@ main(int argc, char** argv){
 
     Interpritator(input_file_stream, head_of_objects);
 
+    fclose(input_file_stream);
+
     Release_head_obj(head_of_objects);
 
-    #ifdef DEBUG
+    #if DEBUG == 1
     fprintf(stdout, "Program end\n");
     #endif
 

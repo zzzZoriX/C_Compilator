@@ -38,10 +38,11 @@ Lexer(Token** tokens_p, const char** words, length_n count_of_words);
  * 
  * @param tokens                    tokens by which parser will be does something
  * @param head                      a head of objects
+ * @param count_of_tokens           you can pass the number of words as this argument
  * 
  * @return                          error object. if error was happened - return object, else - return null
  */
 ErrorStruct*
-Parser(Token* tokens, HeadObject* head);
+Parser(Token* tokens, HeadObject* head, length_n count_of_tokens);
 
 #endif

@@ -29,18 +29,6 @@ typedef struct Token {
 #define NULL_TOKEN {TOK_NULL, NULL, {0}}
 
 /**
- * calculate count of tokens
- * 
- * @param tokens                    tokens array which length need to count
- * 
- * @return                          count of tokens
- */
-static inline unsigned long
-Get_count_of_tokens(Token* tokens){
-    return sizeof(tokens) / sizeof(Token);
-}
-
-/**
  * function which define a token by word
  * 
  * @param last_token                last token

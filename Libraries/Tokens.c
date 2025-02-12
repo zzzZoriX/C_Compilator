@@ -6,6 +6,8 @@ Define_token(Token* last_token, const char* word){
     Token* token = (Token*)malloc(sizeof(Token));
     if(!token) return NULL;
 
+    token = &((Token)NULL_TOKEN);
+
     if(strcmp(word, "int") == 0)            { printf("int\n"), token->type = TOK_INT, token->name = NULL, token->value = (Value){0}; }
     else if(strcmp(word, "char") == 0)      { printf("char\n"), token->type = TOK_CHAR, token->name = NULL, token->value = (Value){0}; }
     else if(strcmp(word, "float") == 0)     { printf("float\n"), token->type = TOK_FLOAT, token->name = NULL, token->value = (Value){0}; }
@@ -15,6 +17,8 @@ Define_token(Token* last_token, const char* word){
 
     else if(*word == '=')                    { printf("assign\n"), token->type = TOK_ASSIGN, token->name = NULL, token->value = (Value){0}; }
     else if(*word == ';')                    { printf("semic\n"), token->type = TOK_SEMIC, token->name = NULL, token->value = (Value){0}; }
+
+    return token;
 }
 
 Type
