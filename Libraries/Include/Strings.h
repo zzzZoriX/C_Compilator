@@ -12,9 +12,21 @@ typedef unsigned long long symbol_n, length_n, strsize_t;
 typedef long line_n, strfpos_t;
 
 /**
+ * release words
+ * 
+ * @param words         words which need to release
+ * @param count_of_words    count of pointed words
+ */
+static inline void
+Release_words(char** words, length_n count_of_words){
+    for(size_t index = 0; index < count_of_words; ++index)
+        free(words[index]);
+}
+
+/**
  * delete all spaces in string
  * 
- * @param buffer_p        buffer where will be writed line without spaces
+ * @param buffer_p      buffer where will be writed line without spaces
  * @param str           source string
  * 
  * @return              error object. if error was happened - return object, else - return null

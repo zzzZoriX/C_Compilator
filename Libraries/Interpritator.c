@@ -21,6 +21,7 @@ Interpritator(FILE* input_file_stream, HeadObject* head){
     result = Read_line_before_symbol_from_file(&line, input_file_stream, '\n');
     while(line != NULL){
         result = Delete_extra_spaces(&line, line);
+
         result = Divide_line_into_words(&words, line, SEPARATOR);
         result = Count_of_words_in_line(&count_of_words, line, SEPARATOR);
 
@@ -30,6 +31,12 @@ Interpritator(FILE* input_file_stream, HeadObject* head){
         result = Read_line_before_symbol_from_file(&line, input_file_stream, '\n');
         ++current_parse_line;
     }
+    
+    /* release all variables */
+    free(line);
+    Release_words(words, count_of_words);
+    free(words);
+    free(tokens);
 }
 
 ErrorStruct*
