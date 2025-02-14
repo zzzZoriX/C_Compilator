@@ -22,8 +22,8 @@ Interpritator(FILE* input_file_stream, HeadObject* head){
     while(line != NULL){
         result = Delete_extra_spaces(&line, line);
 
-        result = Divide_line_into_words(&words, line, SEPARATOR);
-        result = Count_of_words_in_line(&count_of_words, line, SEPARATOR);
+        result = Divide_line_into_words(&words, line, SEPARATOR, true);
+        result = Count_of_words_in_line(&count_of_words, line, SEPARATOR, true);
 
         result = Lexer(&tokens, (const char**)words, count_of_words);
         result = Parser(tokens, head, count_of_words);

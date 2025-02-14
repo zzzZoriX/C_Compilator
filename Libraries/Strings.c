@@ -96,14 +96,16 @@ Read_line_before_symbol_from_file(char** line_p, FILE* stream, char symbol){
 }
 
 ErrorStruct*
-Divide_line_into_words(char*** words_buffer_p, char* line, char separator){
+Divide_line_into_words(char*** words_buffer_p, char* line, char separator, bool semic){
     char* save_pointer_position = line;
 
     /* initialize words array */
     length_n* lengths_of_words;
     length_n count_of_words;
-    Count_of_words_in_line(&count_of_words, line, separator);
-    Get_lengths_of_words(&lengths_of_words, line, separator);
+
+    Count_of_words_in_line(&count_of_words, line, separator, semic);
+    Get_lengths_of_words(&lengths_of_words, line, separator, semic);
+    
     char** words = (char**)malloc(count_of_words * sizeof(char*));
     if(!words){
         ErrorStruct* error = CreateError("Memory allocating failed for words\n", current_parse_line, -1);
@@ -125,12 +127,17 @@ Divide_line_into_words(char*** words_buffer_p, char* line, char separator){
     length_n i = 0, k = 0;
     length_n length_of_line = strlen(line);
     while(*line != '\0'){
-        if(*line != separator && *line != '\n')
+        if(*line != separator && *line != '\n' && *line != ';')
             words[i][k++] = *line;
         else{
-            words[i][k] = '\0';
-            ++i;
+            words[i++][k] = '\0';
             k = 0;
+
+            if (*line == ';') {
+                words[i][k++] = *line;
+                words[i++][k] = '\0';
+                k = 0;
+            }
         }
         ++line;
     }
@@ -177,12 +184,12 @@ Get_length_of_word(strsize_t* length_p, char* line, char separator){
 }
 
 ErrorStruct*
-Count_of_words_in_line(length_n* count_p, char* line, char separator){
+Count_of_words_in_line(length_n* count_p, char* line, char separator, bool semic){
     char* save_pointer_position = line;
     length_n count_of_words = 1;
 
     while(*line != '\0'){
-        if(*line == separator || *line == '\n')
+        if(*line == separator || *line == '\n' || (semic && *line == ';'))
             ++count_of_words;
 
         ++line;
@@ -195,9 +202,9 @@ Count_of_words_in_line(length_n* count_p, char* line, char separator){
 }
 
 ErrorStruct*
-Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator){
+Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator, bool semic){
     length_n count_of_words;
-    Count_of_words_in_line(&count_of_words, line, separator);
+    Count_of_words_in_line(&count_of_words, line, separator, semic);
     char* save_pointer_position = line;
     strsize_t* lengths_of_words = (strsize_t*)calloc(count_of_words, sizeof(strsize_t));
     if(!lengths_of_words){
