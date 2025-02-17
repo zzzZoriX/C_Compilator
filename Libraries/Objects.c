@@ -65,5 +65,5 @@ Delete_obj(Object* obj, HeadObject* head){
     current_obj->next_object = current_obj->next_object->next_object;
 
     Release_obj(delete_obj);
-    --head->count_of_objects;
+    //--head->count_of_objects;
 }
