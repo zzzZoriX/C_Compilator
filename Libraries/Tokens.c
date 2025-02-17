@@ -8,15 +8,15 @@ Define_token(Token* last_token, const char* word){
 
     token = &((Token)NULL_TOKEN);
 
-    if(strcmp(word, "int") == 0)            { printf("int\n"), token->type = TOK_INT, token->name = NULL, token->value = (Value){0}; }
-    else if(strcmp(word, "char") == 0)      { printf("char\n"), token->type = TOK_CHAR, token->name = NULL, token->value = (Value){0}; }
-    else if(strcmp(word, "float") == 0)     { printf("float\n"), token->type = TOK_FLOAT, token->name = NULL, token->value = (Value){0}; }
+    if(strcmp(word, "int") == 0)            { printf("int\n"), token->type = TOK_INT, token->value = strdup(word); }
+    else if(strcmp(word, "char") == 0)      { printf("char\n"), token->type = TOK_CHAR, token->value = strdup(word); }
+    else if(strcmp(word, "float") == 0)     { printf("float\n"), token->type = TOK_FLOAT, token->value = strdup(word); }
 
     else if(isDataType(last_token->type) && isObjVarName(word)) 
-    { printf("ident\n"), token->type = TOK_IDENT, token->name = strdup(word), token->value = (Value){0}; }
+    { printf("ident\n"), token->type = TOK_IDENT, token->value = strdup(word); }
 
-    else if(*word == '=')                    { printf("assign\n"), token->type = TOK_ASSIGN, token->name = NULL, token->value = (Value){0}; }
-    else if(*word == ';')                    { printf("semic\n"), token->type = TOK_SEMIC, token->name = NULL, token->value = (Value){0}; }
+    else if(*word == '=')                    { printf("assign\n"), token->type = TOK_ASSIGN, token->value = strdup(word); }
+    else if(*word == ';')                    { printf("semic\n"), token->type = TOK_SEMIC, token->value = strdup(word); }
 
     return token;
 }

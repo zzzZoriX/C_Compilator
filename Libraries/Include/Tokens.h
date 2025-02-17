@@ -22,11 +22,10 @@ typedef enum TokenType {
 
 typedef struct Token {
     TokenType type;
-    char* name;
-    Value value;
+    char* value;
 } Token;
 
-#define NULL_TOKEN {TOK_NULL, NULL, {0}}
+#define NULL_TOKEN {TOK_NULL, NULL}
 
 /**
  * function which define a token by word
