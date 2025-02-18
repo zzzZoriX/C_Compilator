@@ -15,8 +15,16 @@ Define_token(Token* last_token, const char* word){
     else if(isDataType(last_token->type) && isObjVarName(word)) 
     { printf("ident\n"), token->type = TOK_IDENT, token->value = strdup(word); }
 
-    else if(*word == '=')                    { printf("assign\n"), token->type = TOK_ASSIGN, token->value = strdup(word); }
-    else if(*word == ';')                    { printf("semic\n"), token->type = TOK_SEMIC, token->value = strdup(word); }
+    else if(isDigits(word))                 { printf("number\n"), token->type = TOK_NUMBER, token->value = strdup(word); }
+    else if(*word == '+')                    { printf("+\n"), token->type = TOK_PLUS, token->value = strdup(word); }
+    else if(*word == '-')                    { printf("-\n"), token->type = TOK_MINUS, token->value = strdup(word); }
+    else if(*word == '*')                    { printf("*\n"), token->type = TOK_MULTI, token->value = strdup(word); }
+    else if(*word == '/')                    { printf("/\n"), token->type = TOK_DIVIDE, token->value = strdup(word); }
+    else if(*word == '(')                    { printf("(\n"), token->type = TOK_LPAREN, token->value = strdup(word); }
+    else if(*word == ')')                    { printf(")\n"), token->type = TOK_RPAREN, token->value = strdup(word); }
+
+    else if(*word == '=')                   { printf("assign\n"), token->type = TOK_ASSIGN, token->value = strdup(word); }
+    else if(*word == ';')                   { printf("semic\n"), token->type = TOK_SEMIC, token->value = strdup(word); }
 
     return token;
 }
@@ -46,6 +54,14 @@ bool
 isAlpha(const char* str){
     for(size_t i = 0; i < strlen(str); ++i)
         if(!isalpha(str[i])) return false;
+
+    return true;
+}
+
+bool
+isDigits(const char* str){
+    for(size_t i = 0; i < strlen(str); ++i)
+        if(!isdigit(str[i])) return false;
 
     return true;
 }

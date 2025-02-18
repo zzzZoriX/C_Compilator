@@ -13,6 +13,13 @@ typedef enum TokenType {
     TOK_FLOAT,
 
     TOK_IDENT,
+    
+    TOK_NUMBER,
+    TOK_PLUS,
+    TOK_MINUS,
+    TOK_MULTI,
+    TOK_DIVIDE,
+    TOK_LPAREN, TOK_RPAREN,
 
     TOK_ASSIGN,
     TOK_SEMIC,
@@ -67,6 +74,16 @@ isDataType(TokenType token_type);
  */
 bool
 isAlpha(const char* str);
+
+/**
+ * check to digit is all char
+ * 
+ * @param str                       string which need to check
+ * 
+ * @return                          1 or 0 (true of false)
+ */
+bool
+isDigits(const char* str);
 
 
 /* for variables / objects */
