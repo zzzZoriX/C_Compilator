@@ -4,6 +4,7 @@
 #include "Tokens.h"
 #include "Strings.h"
 #include "Types.h"
+#include "Stack.h"
 
 #include <ctype.h>
 
@@ -16,6 +17,28 @@
  */
 bool
 isValidExmplSymbol(TokenType tok_type);
+
+/**
+ * do simple math operation
+ * 
+ * @param a                 first number
+ * @param b                 second number
+ * @param op                operation
+ * 
+ * @return                  an answer
+ */
+float
+DoOperation(float a, float b, char op);
+
+/**
+ * return priority of operation
+ * 
+ * @param op                operation which priority need to return
+ * 
+ * @return                  operation priority
+ */
+int
+OpPriority(char op);
 
 /**
  * calculate example

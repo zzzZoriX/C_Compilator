@@ -15,30 +15,101 @@ isValidExmplSymbol(TokenType tok_type){
 }
 
 float
+DoOperation(float a, float b, char op){
+    switch(op){
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return a / b;
+        default:
+            fprintf(stderr, "Invalid operation\n");
+            exit(1);
+    }
+}
+
+int
+OpPriority(char op){
+    switch(op){
+        case '+':
+        case '-': return 1;
+
+        case '*':
+        case '/': return 2;
+
+        default: return 0;
+    }
+}
+
+float
 Calculate(Token* tokens, length_n tok_index){
-    float result = atof(tokens[tok_index++].value);
+    float result;
+    long ops_count = 0, nums_count = 0;
+
+    length_n token_index = tok_index;
+    while(isValidExmplSymbol(tokens[token_index].type)){
+        if(tokens[token_index].type != TOK_NUMBER) ++ops_count;
+        else ++nums_count;
+
+        ++token_index;
+    }
+
+    Stack* value_stack,* operation_stack;
+    value_stack = Init_stack(nums_count);
+    operation_stack = Init_stack(ops_count);
 
     while(isValidExmplSymbol(tokens[tok_index].type)){
-        switch(tokens[tok_index].type){
-            case TOK_PLUS:
-                ++tok_index;
-                result += atof(tokens[tok_index].value);
-                break;
-            case TOK_MINUS:
-                ++tok_index;
-                result -= atof(tokens[tok_index].value);
-                break;
-            case TOK_MULTI:
-                ++tok_index;
-                result *= atof(tokens[tok_index].value);
-                break;
-            case TOK_DIVIDE:
-                ++tok_index;
-                result /= atof(tokens[tok_index].value);
-                break;
+
+        if(tokens[tok_index].type == TOK_NUMBER){
+            float value = atof(tokens[tok_index].value);
+            Push(value_stack, value);
         }
-        ++tok_index;
+        
+        else if(tokens[tok_index].type == TOK_LPAREN)
+            Push(operation_stack, '(');
+
+        else if(tokens[tok_index].type == TOK_RPAREN){
+            while(!isStackEmpty(operation_stack) && Peek(operation_stack) != ')'){
+                float a = Pop(value_stack);
+                float b = Pop(value_stack);
+                char op = (char)Pop(operation_stack);
+                
+                float value = DoOperation(a, b, op);
+                Push(value_stack, value);
+            }
+            Pop(operation_stack);
+        }
+
+        else if(
+            tokens[tok_index].type == TOK_PLUS || 
+            tokens[tok_index].type == TOK_MINUS ||
+            tokens[tok_index].type == TOK_MULTI ||
+            tokens[tok_index].type == TOK_DIVIDE
+        ) {
+            while(!isStackEmpty(operation_stack) && OpPriority(Peek(operation_stack)) >= OpPriority(*(tokens[tok_index].value))){
+                float a = Pop(value_stack);
+                float b = Pop(value_stack);
+                char op = (char)Pop(operation_stack);
+                
+                float value = DoOperation(a, b, op);
+                Push(value_stack, value);
+            }
+            Pop(operation_stack);
+        }
     }
+
+    while(!isStackEmpty(operation_stack)){
+        float a = Pop(value_stack);
+        float b = Pop(value_stack);
+        char op = (char)Pop(operation_stack);
+        
+        float value = DoOperation(a, b, op);
+        Push(value_stack, value);
+    }
+
+    result = Pop(value_stack);
+
+    Release_stack(value_stack);
+    Release_stack(operation_stack);
 
     return result;
 }
