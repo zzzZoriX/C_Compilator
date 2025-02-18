@@ -14,30 +14,31 @@ isValidExmplSymbol(TokenType tok_type){
     return false;
 }
 
-char*
-Convert_tokens_to_example(Token* tokens, length_n tok_index){
-    size_t total_length = 0;
-    length_n current_index = tok_index;
-    while(isValidExmplSymbol(tokens[current_index].type)){
-        total_length += strlen(tokens[current_index].value);
-        ++current_index;
-    }
-
-    char* exmpl = (char*)malloc(total_length + 1);
-    exmpl[0] = '\0';
+float
+Calculate(Token* tokens, length_n tok_index){
+    float result = atof(tokens[tok_index++].value);
 
     while(isValidExmplSymbol(tokens[tok_index].type)){
         switch(tokens[tok_index].type){
-            case TOK_PLUS: strcat(exmpl, tokens[tok_index].value); break;     // +
-            case TOK_MINUS: strcat(exmpl, tokens[tok_index].value); break;    // -
-            case TOK_MULTI: strcat(exmpl, tokens[tok_index].value); break;    // *
-            case TOK_DIVIDE: strcat(exmpl, tokens[tok_index].value); break;   // /
-            case TOK_LPAREN: strcat(exmpl, tokens[tok_index].value); break;   // (
-            case TOK_RPAREN: strcat(exmpl, tokens[tok_index].value); break;   // )
-            case TOK_NUMBER: strcat(exmpl, tokens[tok_index].value); break;   // 1, 2, ...
+            case TOK_PLUS:
+                ++tok_index;
+                result += atof(tokens[tok_index].value);
+                break;
+            case TOK_MINUS:
+                ++tok_index;
+                result -= atof(tokens[tok_index].value);
+                break;
+            case TOK_MULTI:
+                ++tok_index;
+                result *= atof(tokens[tok_index].value);
+                break;
+            case TOK_DIVIDE:
+                ++tok_index;
+                result /= atof(tokens[tok_index].value);
+                break;
         }
         ++tok_index;
     }
 
-    return exmpl;
+    return result;
 }

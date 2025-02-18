@@ -18,22 +18,14 @@ bool
 isValidExmplSymbol(TokenType tok_type);
 
 /**
- * convert tokens to mathematical example as string
+ * calculate example
  * 
  * @param tokens            tokens
  * @param tok_index         token from which function will start
  * 
- * @return                  math example
- */
-char*
-Convert_tokens_to_example(Token* tokens, length_n tok_index);
-
-/**
- * calculate example
- * 
- * @param example           a math example which need to calculate
+ * @return                  an answer of example
  */
 float
-Calculate(char* example);
+Calculate(Token* tokens, length_n tok_index);
 
 #endif
