@@ -9,6 +9,7 @@ Init_stack(long size){
         exit(1);
     }
     s->top = -1;
+    s->stack_size = size;
     return s;
 }
 
@@ -37,4 +38,13 @@ Pop(Stack* s){
         exit(1);
     }
     return s->data[(s->top)--];
+}
+
+float
+Peek(Stack* s){
+    if(isStackEmpty(s)){
+        fprintf(stderr, "Stack is empty\n");
+        exit(1);
+    }
+    return s->data[s->top];
 }

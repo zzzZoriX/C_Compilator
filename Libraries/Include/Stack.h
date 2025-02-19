@@ -37,8 +37,10 @@ Init_stack(long size);
  * @param s             stack which data need to release
  */
 static inline void
-Release_stack(Stack* s)
-{ free(s->data); }
+Release_stack(Stack* s){ 
+    free(s->data); 
+    free(s); 
+}
 
 /**
  * checks current capacity is equal to total stack size 
@@ -78,5 +80,15 @@ Push(Stack* s, float data);
  */
 float
 Pop(Stack* s);
+
+/**
+ * return a top data on the stack and dont remove it from stack
+ * 
+ * @param s             stack from which top need to get a data
+ * 
+ * @return              data from top on the stack
+ */
+float
+Peek(Stack* s);
 
 #endif
