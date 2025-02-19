@@ -1,5 +1,11 @@
 #include "./include/ErrorHandler.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif /* _WIN32 */
+
 line_n lines = 0;
 ErrorStruct* result = NULL;
 
@@ -20,9 +26,17 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
 
 void*
 CheckToError(){
-    if(result){
-        PrintError(result);
-        exit(1);
+    while(1){
+        if(result && result->error_symbol != -9){
+            PrintError(result);
+            exit(1);
+        }
+
+        #ifdef _WIN32
+        Sleep(1000);
+        #else
+        usleep(1000000);
+        #endif /* _WIN32 */
     }
 }
 

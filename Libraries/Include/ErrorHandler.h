@@ -10,8 +10,7 @@ struct ErrorStruct;
 #include "Tokens.h"
 #include "Strings.h"
 
-
-typedef unsigned long long err_line, err_symbol;
+typedef long long err_line, err_symbol;
 
 /**
  * the struct of error which will be print when the error occured 
@@ -70,4 +69,4 @@ PrintError(ErrorStruct* error);
 void
 RealeaseError(ErrorStruct* error);
 
-#endif
+#endif /* ERRORHANDLER_H */
