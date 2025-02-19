@@ -29,4 +29,14 @@ typedef union Value {
     double double_value;
 } Value;
 
+/**
+ * write new value to suitable digit type variable
+ * 
+ * @param type                  type of new value
+ * @param value                 value variable where need to write new value
+ * @param new_value             new value for "value"
+ */
+void
+Select_correct_digit_value(Type type, Value* value, float new_value);
+
 #endif
