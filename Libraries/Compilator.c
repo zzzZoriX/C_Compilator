@@ -57,8 +57,57 @@ Lexer(Token** tokens_p, FILE* input_file_stream){
     
     *tokens_p = tokens;
 
-    for(length_n i = 0; i < count_of_words; ++i)
-        printf("%s\n", tokens[i].value);
-
     return NULL;
+}
+
+ErrorStruct*
+Parser(Token* tokens, length_n count_of_words){
+
+    HeadObject* var_head = Init_head_obj(); // header of variables
+    //HeadObject* cmd_head = Init_head_obj(); // header of commands(functions)
+
+    Type current_data_type = TYPE_UNDEF;
+    Value current_data_value = (Value){0};
+    char* current_object_name = NULL;
+
+    size_t token_index = 0;
+    while(token_index < count_of_words){
+
+        if(isDataType(tokens[token_index].type)){
+            current_data_type = Define_type(tokens[token_index++].type);
+            continue;
+        }
+        
+        switch(tokens[token_index].type){
+            
+            case TOK_IDENT:
+                current_object_name = strdup(tokens[token_index].value);
+                break;
+            case TOK_ASSIGN:
+                ++token_index;
+                if(token_index >= count_of_words){
+                    Release_head_obj(var_head);
+                    return CreateError("Unexpected end of file after assigment\n", current_parse_line, -1);
+                }
+
+                float new_value = Calculate(tokens, token_index);
+                Select_correct_digit_value(current_data_type, &current_data_value, new_value);
+                break;
+
+            case TOK_SEMIC:
+                Object* new_obj = Init_obj(current_object_name, current_data_type, current_data_value);
+                Add_obj(new_obj, var_head);
+                break;
+
+            default:
+                char* error_msg = "Undefined token: ";
+                error_msg = strcat(error_msg, tokens[token_index].value);
+                return CreateError(error_msg, current_parse_line, -1);
+        }
+
+        ++token_index;
+    }
+
+    Release_head_obj(var_head);
+    //Release_head_obj(cmd_head);
 }
