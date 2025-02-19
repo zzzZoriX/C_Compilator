@@ -16,7 +16,7 @@
  * @return                  true or false 
  */
 bool
-isValidExmplSymbol(TokenType tok_type);
+isValidExmplSymbol(LexerTokenType tok_type);
 
 /**
  * do simple math operation

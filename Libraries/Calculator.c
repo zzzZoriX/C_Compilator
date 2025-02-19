@@ -1,7 +1,7 @@
 #include "./Include/Calculator.h"
 
 bool
-isValidExmplSymbol(TokenType tok_type){
+isValidExmplSymbol(LexerTokenType tok_type){
     if(
         tok_type == TOK_NUMBER ||
         tok_type == TOK_DIVIDE ||
@@ -68,7 +68,7 @@ Calculate(Token* tokens, length_n tok_index){
             Push(operation_stack, '(');
 
         else if(tokens[tok_index].type == TOK_RPAREN){
-            while(!isStackEmpty(operation_stack) && Peek(operation_stack) != ')'){
+            while(!isStackEmpty(operation_stack) && Peek(operation_stack) != '('){
                 float a = Pop(value_stack);
                 float b = Pop(value_stack);
                 char op = (char)Pop(operation_stack);
@@ -85,16 +85,19 @@ Calculate(Token* tokens, length_n tok_index){
             tokens[tok_index].type == TOK_MULTI ||
             tokens[tok_index].type == TOK_DIVIDE
         ) {
+            char op = *(tokens[tok_index].value);
             while(!isStackEmpty(operation_stack) && OpPriority(Peek(operation_stack)) >= OpPriority(*(tokens[tok_index].value))){
                 float a = Pop(value_stack);
                 float b = Pop(value_stack);
-                char op = (char)Pop(operation_stack);
+                char stack_op = (char)Pop(operation_stack);
                 
-                float value = DoOperation(a, b, op);
+                float value = DoOperation(a, b, stack_op);
                 Push(value_stack, value);
             }
-            Pop(operation_stack);
+            Push(operation_stack, op);
         }
+
+        ++tok_index;
     }
 
     while(!isStackEmpty(operation_stack)){
