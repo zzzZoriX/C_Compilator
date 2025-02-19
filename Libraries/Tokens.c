@@ -8,29 +8,29 @@ Define_token(Token* last_token, const char* word){
 
     token = &((Token)NULL_TOKEN);
 
-    if(strcmp(word, "int") == 0)            { printf("int\n"), token->type = TOK_INT, token->value = strdup(word); }
-    else if(strcmp(word, "char") == 0)      { printf("char\n"), token->type = TOK_CHAR, token->value = strdup(word); }
-    else if(strcmp(word, "float") == 0)     { printf("float\n"), token->type = TOK_FLOAT, token->value = strdup(word); }
+    if(strcmp(word, "int") == 0)            { token->type = TOK_INT, token->value = strdup(word); }
+    else if(strcmp(word, "char") == 0)      { token->type = TOK_CHAR, token->value = strdup(word); }
+    else if(strcmp(word, "float") == 0)     { token->type = TOK_FLOAT, token->value = strdup(word); }
 
     else if(isDataType(last_token->type) && isObjVarName(word)) 
-    { printf("ident\n"), token->type = TOK_IDENT, token->value = strdup(word); }
+    { token->type = TOK_IDENT, token->value = strdup(word); }
 
-    else if(isDigits(word))                 { printf("number\n"), token->type = TOK_NUMBER, token->value = strdup(word); }
-    else if(*word == '+')                    { printf("+\n"), token->type = TOK_PLUS, token->value = strdup(word); }
-    else if(*word == '-')                    { printf("-\n"), token->type = TOK_MINUS, token->value = strdup(word); }
-    else if(*word == '*')                    { printf("*\n"), token->type = TOK_MULTI, token->value = strdup(word); }
-    else if(*word == '/')                    { printf("/\n"), token->type = TOK_DIVIDE, token->value = strdup(word); }
-    else if(*word == '(')                    { printf("(\n"), token->type = TOK_LPAREN, token->value = strdup(word); }
-    else if(*word == ')')                    { printf(")\n"), token->type = TOK_RPAREN, token->value = strdup(word); }
+    else if(isDigits(word))                 { token->type = TOK_NUMBER, token->value = strdup(word); }
+    else if(*word == '+')                    { token->type = TOK_PLUS, token->value = strdup(word); }
+    else if(*word == '-')                    { token->type = TOK_MINUS, token->value = strdup(word); }
+    else if(*word == '*')                    { token->type = TOK_MULTI, token->value = strdup(word); }
+    else if(*word == '/')                    { token->type = TOK_DIVIDE, token->value = strdup(word); }
+    else if(*word == '(')                    { token->type = TOK_LPAREN, token->value = strdup(word); }
+    else if(*word == ')')                    { token->type = TOK_RPAREN, token->value = strdup(word); }
 
-    else if(*word == '=')                   { printf("assign\n"), token->type = TOK_ASSIGN, token->value = strdup(word); }
-    else if(*word == ';')                   { printf("semic\n"), token->type = TOK_SEMIC, token->value = strdup(word); }
+    else if(*word == '=')                   { token->type = TOK_ASSIGN, token->value = strdup(word); }
+    else if(*word == ';')                   { token->type = TOK_SEMIC, token->value = strdup(word); }
 
     return token;
 }
 
 Type
-Define_type(TokenType token_type){
+Define_type(LexerTokenType token_type){
     switch(token_type){
         case TOK_CHAR: return TYPE_CHAR;
         case TOK_FLOAT: return TYPE_FLOAT;
@@ -41,7 +41,7 @@ Define_type(TokenType token_type){
 }
 
 bool
-isDataType(TokenType token_type){
+isDataType(LexerTokenType token_type){
     if(
         token_type == TOK_INT ||
         token_type == TOK_CHAR ||

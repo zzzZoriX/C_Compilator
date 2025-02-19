@@ -7,7 +7,7 @@
 
 #include "Types.h"
 
-typedef enum TokenType {
+typedef enum LexerTokenType {
     TOK_INT,
     TOK_CHAR,
     TOK_FLOAT,
@@ -25,10 +25,10 @@ typedef enum TokenType {
     TOK_SEMIC,
 
     TOK_NULL
-} TokenType;
+} LexerTokenType;
 
 typedef struct Token {
-    TokenType type;
+    LexerTokenType type;
     char* value;
 } Token;
 
@@ -53,7 +53,7 @@ Define_token(Token* last_token, const char* word);
  * @return                          type
  */
 Type
-Define_type(TokenType token_type);
+Define_type(LexerTokenType token_type);
 
 /**
  * check to token type is data type
@@ -63,7 +63,7 @@ Define_type(TokenType token_type);
  * @return                          1 or 0 (true or false)
  */
 bool
-isDataType(TokenType token_type);
+isDataType(LexerTokenType token_type);
 
 /**
  * check to string is all char
