@@ -12,8 +12,12 @@ Define_token(Token* last_token, const char* word){
     else if(strcmp(word, "char") == 0)      { token->type = TOK_CHAR, token->value = strdup(word); }
     else if(strcmp(word, "float") == 0)     { token->type = TOK_FLOAT, token->value = strdup(word); }
 
-    else if(isDataType(last_token->type) && isObjVarName(word)) 
-    { token->type = TOK_IDENT, token->value = strdup(word); }
+    else if(
+        (isDataType(last_token->type) && isObjVarName(word)) ||
+        (last_token->value != "\"" && isObjVarName(word))
+    ) {
+        token->type = TOK_IDENT, token->value = strdup(word);
+    }
 
     else if(isDigits(word))                 { token->type = TOK_NUMBER, token->value = strdup(word); }
     else if(*word == '+')                    { token->type = TOK_PLUS, token->value = strdup(word); }
