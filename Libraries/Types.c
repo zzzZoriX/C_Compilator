@@ -1,4 +1,5 @@
 #include "./Include/Types.h"
+#include <stdio.h>
 
 void
 Select_correct_digit_value(Type type, Value* value, float new_value){

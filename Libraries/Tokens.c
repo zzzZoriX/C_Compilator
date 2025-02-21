@@ -11,6 +11,9 @@ Define_token(Token* last_token, const char* word){
     if(strcmp(word, "int") == 0)            { token->type = TOK_INT, token->value = strdup(word); }
     else if(strcmp(word, "char") == 0)      { token->type = TOK_CHAR_T, token->value = strdup(word); }
     else if(strcmp(word, "float") == 0)     { token->type = TOK_FLOAT, token->value = strdup(word); }
+    else if(strcmp(word, "double") == 0)    { token->type = TOK_DOUBLE, token->value = strdup(word); }
+    else if(strcmp(word, "string") == 0)    { token->type = TOK_STRING_T, token->value = strdup(word); }
+    else if(strcmp(word, "bool") == 0)      { token->type == TOK_BOOL, token->value = strdup(word); }
 
     else if(
         (isDataType(last_token->type) && isObjVarName(word)) ||
@@ -39,6 +42,9 @@ Define_type(LexerTokenType token_type){
         case TOK_CHAR_T: return TYPE_CHAR;
         case TOK_FLOAT: return TYPE_FLOAT;
         case TOK_INT: return TYPE_INT;
+        case TOK_DOUBLE: return TYPE_DOUBLE;
+        case TOK_STRING_T: return TYPE_STRING;
+        case TOK_BOOL: return TYPE_BOOL;
 
         default: return TYPE_UNDEF;
     }
@@ -47,9 +53,12 @@ Define_type(LexerTokenType token_type){
 bool
 isDataType(LexerTokenType token_type){
     if(
-        token_type == TOK_INT ||
-        token_type == TOK_CHAR_T ||
-        token_type == TOK_FLOAT
+        token_type == TOK_INT      ||
+        token_type == TOK_CHAR_T   ||
+        token_type == TOK_FLOAT    ||
+        token_type == TOK_DOUBLE   ||
+        token_type == TOK_STRING_T ||
+        token_type == TOK_BOOL
     ) return true;
     return false;
 }
