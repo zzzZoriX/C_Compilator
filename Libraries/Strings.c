@@ -130,8 +130,10 @@ Divide_line_into_words(char*** words_buffer_p, char* line, char separator, bool 
         if(*line != separator && *line != '\n' && *line != ';')
             words[i][k++] = *line;
         else{
-            words[i++][k] = '\0';
-            k = 0;
+            if(k > 0){
+                words[i++][k] = '\0';
+                k = 0;
+            }
 
             if (*line == ';') {
                 words[i][k++] = *line;
