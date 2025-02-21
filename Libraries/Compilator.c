@@ -84,14 +84,30 @@ Parser(Token* tokens, length_n count_of_words){
                 current_object_name = strdup(tokens[token_index].value);
                 break;
             case TOK_ASSIGN:
-                ++token_index;
-                if(token_index >= count_of_words){
-                    Release_head_obj(var_head);
-                    return CreateError("Unexpected end of file after assigment\n", current_parse_line, -1);
-                }
+                if(isDataType(tokens[token_index - 2].type)) // set value
+                {
+                    ++token_index;
+                    if(token_index >= count_of_words){
+                        Release_head_obj(var_head);
+                        return CreateError("Unexpected end of file after assigment\n", current_parse_line, -1);
+                    }
 
-                float new_value = Calculate(tokens, token_index);
-                Select_correct_digit_value(current_data_type, &current_data_value, new_value);
+                    float new_value = Calculate(tokens, token_index);
+                    Select_correct_digit_value(current_data_type, &current_data_value, new_value);
+                }
+                else                                         // change value
+                {                                       
+                    Object* current_obj = Find_obj(tokens[token_index - 1].value, var_head);
+
+                    ++token_index;
+                    if(token_index >= count_of_words){
+                        Release_head_obj(var_head);
+                        return CreateError("Unexpected end of file after assigment\n", current_parse_line, -1);
+                    }
+
+                    float new_value = Calculate(tokens, token_index);
+                    Select_correct_digit_value(current_obj->object_type, &(current_obj->object_value), new_value);
+                }
                 break;
 
             case TOK_SEMIC:

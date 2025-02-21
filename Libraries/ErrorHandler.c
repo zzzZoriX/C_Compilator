@@ -31,12 +31,6 @@ CheckToError(){
             PrintError(result);
             exit(1);
         }
-
-        #ifdef _WIN32
-        Sleep(1000);
-        #else
-        usleep(1000000);
-        #endif /* _WIN32 */
     }
 }
 
