@@ -9,8 +9,11 @@
 
 typedef enum LexerTokenType {
     TOK_INT,
-    TOK_CHAR,
+    TOK_CHAR_T,
     TOK_FLOAT,
+    TOK_BOOL,
+    TOK_DOUBLE,
+    TOK_STRING_T,
 
     TOK_IDENT,
     
