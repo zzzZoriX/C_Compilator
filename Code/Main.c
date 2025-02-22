@@ -7,7 +7,7 @@ extern ErrorStruct* result;
 
 /*
     compile command
-    gcc ./code/main.c ./libraries/types.c ./libraries/calculator.c ./libraries/stack.c ./libraries/compilator.c ./libraries/tokens.c ./libraries/strings.c ./libraries/objects.c ./libraries/errorhandler.c -o output_file
+    gcc ./code/main.c ./libraries/value.c ./libraries/types.c ./libraries/calculator.c ./libraries/stack.c ./libraries/compilator.c ./libraries/tokens.c ./libraries/strings.c ./libraries/objects.c ./libraries/errorhandler.c -o output_file
 */
 
 int
