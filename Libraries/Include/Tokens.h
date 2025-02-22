@@ -59,6 +59,18 @@ Type
 Define_type(LexerTokenType token_type);
 
 /**
+ * function which define a type of value
+ * 
+ * @param token                     token by which type will be defined
+ * 
+ * @return                          type of value
+ */
+Type
+Define_type_of_value(Token* token);
+
+/* logical funcs */
+
+/**
  * check to token type is data type
  * 
  * @param token_type                token type which will be checked
