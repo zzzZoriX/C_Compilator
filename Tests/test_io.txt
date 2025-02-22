@@ -1,0 +1,5 @@
+int a = 2;
+print(a);
+read(a);
+print("is a-variable value\n");
+print(a);
