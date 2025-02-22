@@ -67,7 +67,6 @@ Parser(Token* tokens, length_n count_of_words){
     //HeadObject* cmd_head = Init_head_obj(); // header of commands(functions)
 
     Type current_data_type = TYPE_UNDEF;
-    Value current_data_value = (Value){0};
     char* current_object_name = NULL;
 
     size_t token_index = 0;
@@ -83,36 +82,18 @@ Parser(Token* tokens, length_n count_of_words){
             case TOK_IDENT:
                 current_object_name = strdup(tokens[token_index].value);
                 break;
+
             case TOK_ASSIGN:
-                if(isDataType(tokens[token_index - 2].type)) // set value
-                {
-                    ++token_index;
-                    if(token_index >= count_of_words){
-                        Release_head_obj(var_head);
-                        return CreateError("Unexpected end of file after assigment\n", current_parse_line, -1);
-                    }
-
-                    float new_value = Calculate(tokens, token_index);
-                    Select_correct_digit_value(current_data_type, &current_data_value, new_value);
+                ++token_index;
+                if(token_index >= count_of_words){
+                    Release_head_obj(var_head);
+                    return CreateError("Unexpected end of file after assigment\n", current_parse_line, -1);
                 }
-                else                                         // change value
-                {                                       
-                    Object* current_obj = Find_obj(tokens[token_index - 1].value, var_head);
 
-                    ++token_index;
-                    if(token_index >= count_of_words){
-                        Release_head_obj(var_head);
-                        return CreateError("Unexpected end of file after assigment\n", current_parse_line, -1);
-                    }
-
-                    float new_value = Calculate(tokens, token_index);
-                    Select_correct_digit_value(current_obj->object_type, &(current_obj->object_value), new_value);
-                }
+                Assign(var_head, tokens, token_index, current_object_name, current_data_type);
                 break;
 
             case TOK_SEMIC:
-                Object* new_obj = Init_obj(current_object_name, current_data_type, current_data_value);
-                Add_obj(new_obj, var_head);
                 break;
 
             default:

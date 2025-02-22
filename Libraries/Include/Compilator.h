@@ -11,6 +11,7 @@
 #include "Objects.h"
 #include "Calculator.h"
 #include "Stack.h"
+#include "Value.h"
 
 #define SEPARATOR ' '
 
