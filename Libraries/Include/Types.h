@@ -2,6 +2,7 @@
 #define TYPES_H
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #define true 1
 #define false 0
@@ -9,6 +10,7 @@
 typedef uint8_t bool;
 
 typedef enum {
+    TYPE_DIGIT,
     TYPE_INT,
     TYPE_CHAR,
     TYPE_STRING,
@@ -27,6 +29,7 @@ typedef union Value {
     char char_value;
     float float_value;
     double double_value;
+    char* string_value;
 } Value;
 
 /**
@@ -38,5 +41,16 @@ typedef union Value {
  */
 void
 Select_correct_digit_value(Type type, Value* value, float new_value);
+
+/**
+ * validate a value by type
+ * 
+ * @param type                  a type by which value will be validate
+ * @param value                 a value which need to validate
+ * 
+ * @return                      true or false
+ */
+bool
+Validate_value(Type type, Value value);
 
 #endif
