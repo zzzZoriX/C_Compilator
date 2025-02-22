@@ -3,8 +3,8 @@
 bool
 isThere(const char* name, HeadObject* head){
     Object* current_obj = head->first_object;
-    while(current_obj != NULL && strcmp(current_obj->object_name, name) != 0){
-        if(current_obj->object_name && strcmp(current_obj->object_name, name) == 0) return true;
+    while(current_obj != NULL){
+        if(strcmp(current_obj->object_name, name) == 0) return true;
 
         current_obj = current_obj->next_object;
     }
@@ -14,8 +14,11 @@ isThere(const char* name, HeadObject* head){
 Object*
 Find_obj(const char* name, HeadObject* head){
     Object* current_obj = head->first_object;
-    while(current_obj != NULL && strcmp(current_obj->object_name, name) != 0)
+    while(current_obj != NULL){
+        if(strcmp(current_obj->object_name, name) == 0) return current_obj;
+
         current_obj = current_obj->next_object;
+    }
 
     if(current_obj == NULL) return NULL;
     return current_obj;
