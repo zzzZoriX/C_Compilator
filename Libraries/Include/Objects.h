@@ -93,9 +93,18 @@ Release_head_obj(HeadObject* head){
 }
 
 /**
+ * checks for the presence of an object
+ * 
+ * @param name                  name by which will be search an object
+ * @param head                  head of objects
+ */
+bool
+isThere(const char* name, HeadObject* head);
+
+/**
  * searching the object by name
  * 
- * @param name                  name by which will be search the object
+ * @param name                  name by which will be search object
  * @param head                  head of objects
  * 
  * @return                      found object

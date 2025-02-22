@@ -1,5 +1,16 @@
 #include "./Include/Objects.h"
 
+bool
+isThere(const char* name, HeadObject* head){
+    Object* current_obj = head->first_object;
+    while(current_obj != NULL && strcmp(current_obj->object_name, name) != 0){
+        if(current_obj->object_name && strcmp(current_obj->object_name, name) == 0) return true;
+
+        current_obj = current_obj->next_object;
+    }
+    return false;
+}
+
 Object*
 Find_obj(const char* name, HeadObject* head){
     Object* current_obj = head->first_object;
