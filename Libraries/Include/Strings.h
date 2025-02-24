@@ -120,4 +120,14 @@ Count_of_words_in_line(length_n* count_p, char* line, char separator, bool semic
 struct ErrorStruct*
 Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator, bool semic);
 
+/**
+ * translate word to ascii code for each char
+ * 
+ * @param word          word which need to translate
+ * 
+ * @return              ascii code for each char
+ */
+int*
+Word_to_ascii(const char* word);
+
 #endif

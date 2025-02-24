@@ -231,3 +231,17 @@ Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator, bool sem
 
     return NULL;
 }
+
+int*
+Word_to_ascii(const char* word){
+    int* ascii_codes = (int*)calloc(strlen(word), sizeof(int));
+    if(!ascii_codes){
+        fprintf(stderr, "Memory allocating failed for ascii codes\n");
+        exit(1);
+    }
+
+    for(strsize_t i = 0; i < strlen(word); ++i)
+        ascii_codes[i] = (int)word[i];
+
+    return ascii_codes;
+}
