@@ -130,4 +130,14 @@ Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator, bool sem
 int*
 Word_to_ascii(const char* word);
 
+/**
+ * calculate length of string format number
+ * 
+ * @param n             n which length need to calculate
+ * 
+ * @return              length of number
+ */
+length_n
+Get_length_of_num(int n);
+
 #endif

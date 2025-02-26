@@ -245,3 +245,22 @@ Word_to_ascii(const char* word){
 
     return ascii_codes;
 }
+
+length_n
+Get_length_of_num(int n){
+    if(n == 0) return 1;
+
+    int n_copy = n;
+    strsize_t length = 0;
+    if(n_copy < 0){
+        ++length;
+        n_copy = -n_copy;
+    }
+    
+    while(n_copy >= 1){
+        n_copy /= 10;
+        ++length;
+    }
+
+    return length;
+}
