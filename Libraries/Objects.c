@@ -3,6 +3,10 @@
 bool
 isThere(const char* name, HeadObject* head){
     Object* current_obj = head->first_object;
+    
+    if(head->count_of_objects == 1)
+        return strcmp(current_obj->object_name, name) == 0;
+
     while(current_obj != NULL){
         if(strcmp(current_obj->object_name, name) == 0) return true;
 
@@ -14,14 +18,17 @@ isThere(const char* name, HeadObject* head){
 Object*
 Find_obj(const char* name, HeadObject* head){
     Object* current_obj = head->first_object;
+
+    if(head->count_of_objects == 1 && strcmp(current_obj->object_name, name) == 0)
+        return current_obj;
+
     while(current_obj != NULL){
         if(strcmp(current_obj->object_name, name) == 0) return current_obj;
 
         current_obj = current_obj->next_object;
     }
 
-    if(current_obj == NULL) return NULL;
-    return current_obj;
+    return NULL;
 }
 
 HeadObject*
@@ -80,4 +87,26 @@ Delete_obj(Object* obj, HeadObject* head){
 
     Release_obj(delete_obj);
     //--head->count_of_objects;
+}
+
+float
+Get_value_obj(Object* obj){
+    switch(obj->object_type){
+        case TYPE_INT:    return (float)obj->object_value.int_value;
+        case TYPE_FLOAT:  return obj->object_value.float_value;
+        case TYPE_DOUBLE: return (float)obj->object_value.double_value;
+
+        case TYPE_STRING:
+            int* ascii_for_word = Word_to_ascii(obj->object_value.string_value);
+            int result = ascii_for_word[0];
+            
+            for(size_t i = 1; i < strlen(obj->object_value.string_value); ++i)
+                result = result * 10 + ascii_for_word[i];
+
+            free(ascii_for_word);
+            return (float)result;
+
+        case TYPE_CHAR: return (float)(int)obj->object_value.char_value;
+        case TYPE_BOOL: return obj->object_value.bool_value;
+    }
 }

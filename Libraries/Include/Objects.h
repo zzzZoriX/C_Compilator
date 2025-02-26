@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "Types.h"
+#include "Strings.h"
 
 /**
  * type of object
@@ -151,5 +152,15 @@ Add_obj(Object* obj, HeadObject* head_obj);
  */
 void
 Delete_obj(Object* obj, HeadObject* head);
+
+/**
+ * give a value of object
+ * 
+ * @param obj                   object which value need to give
+ * 
+ * @return                      value
+ */
+float
+Get_value_obj(Object* obj);
 
 #endif
