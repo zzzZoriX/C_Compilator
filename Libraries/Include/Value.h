@@ -30,8 +30,27 @@ Assign(
  * 
  * @param tokens            all tokens
  * @param token_index       token index in tokens list from which need to start read a value
+ * @param var_head          header of variables
  */
 Value
-Get_value(Token* tokens, size_t token_index);
+Get_value(Token* tokens, size_t token_index, HeadObject* var_head);
+
+/**
+ * function which define and change a token-type by token value 
+ * 
+ * @param token                     token by which value type will be define and change
+ */
+void
+Define_and_change_tok_type(Token* token);
+
+/**
+ * the function which transform a object name to it value
+ * 
+ * @param tokens                    tokens list
+ * @param token_index               current token index 
+ * @param var_head                  variables header
+ */
+void
+Transform_obj_name_to_it_value(Token* tokens, size_t token_index, HeadObject* var_head);
 
 #endif
