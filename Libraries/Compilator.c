@@ -1,5 +1,7 @@
 #include "./Include/Compilator.h"
 
+#define DEBUG 0
+
 line_n current_parse_line = 0;
 Token empty_token = NULL_TOKEN;
 extern ErrorStruct* result;
@@ -71,6 +73,10 @@ Parser(Token* tokens, length_n count_of_words){
 
     size_t token_index = 0;
     while(token_index < count_of_words){
+
+        #if DEBUG == 1
+        printf("%zu | %s | %s\n", token_index, tokens[token_index].value, current_object_name);
+        #endif
 
         if(isDataType(tokens[token_index].type)){
             current_data_type = Define_type(tokens[token_index++].type);
