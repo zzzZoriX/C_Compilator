@@ -3,6 +3,7 @@
         "errorhandler.h": "c",
         "random": "cpp",
         "tokens.h": "c",
-        "objects.h": "c"
+        "objects.h": "c",
+        "types.h": "c"
     }
 }
