@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "Types.h"
+#include "Strings.h"
 
 typedef enum LexerTokenType {
     TOK_INT,
