@@ -35,7 +35,7 @@ Get_value(Token* tokens, size_t token_index, HeadObject* var_head){
             break;
 
         case TYPE_STRING:
-            char* str_copy = strdup(tokens[token_index].value);
+            char* str_copy = _strdup(tokens[token_index].value);
             if(!str_copy){
                 fprintf(stderr, "Memory allocating failed for line\n");
                 exit(1);
@@ -88,7 +88,7 @@ Transform_obj_name_to_it_value(Token* tokens, size_t token_index, HeadObject* va
         
             if(tokens[index].value) free(tokens[index].value);
         
-            tokens[index].value = strdup(buffer);
+            tokens[index].value = _strdup(buffer);
             Define_and_change_tok_type(&tokens[index]);
             
             ++index;

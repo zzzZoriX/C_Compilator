@@ -1,6 +1,6 @@
 #include "./Include/Objects.h"
 
-bool
+bool_t
 isThere(const char* name, HeadObject* head){
     Object* current_obj = head->first_object;
     

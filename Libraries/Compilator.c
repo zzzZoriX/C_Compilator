@@ -54,7 +54,7 @@ Lexer(Token** tokens_p, FILE* input_file_stream){
     
     /* delete all used variables and return data */
     for(length_n i = 0; i < count_of_words; ++i)
-    free(words[i]);
+        free(words[i]);
     free(words);
     
     *tokens_p = tokens;
@@ -104,7 +104,7 @@ Parser(Token* tokens, length_n count_of_words){
 
             default:
                 char* error_msg = "Undefined token: ";
-                error_msg = strcat(error_msg, tokens[token_index].value);
+                error_msg;
                 return CreateError(error_msg, current_parse_line, -1);
         }
 

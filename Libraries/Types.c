@@ -12,7 +12,7 @@ Select_correct_digit_value(Type type, Value* value, float new_value){
     }
 }
 
-bool
+bool_t
 Validate_value(Type type, Value value){
     if(type == TYPE_STRING && value.string_value) return true;
     if(type == TYPE_BOOL && value.bool_value != 2) return true;

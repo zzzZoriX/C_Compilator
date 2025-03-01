@@ -15,7 +15,7 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
 
     error->error_line = error_line;
     error->error_symbol = error_symbol;
-    error->error_message = strdup(error_text);
+    error->error_message = _strdup(error_text);
 
     if(!error){
         fprintf(stdout, "Memory allocation failed for error\n");

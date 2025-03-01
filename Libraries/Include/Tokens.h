@@ -6,7 +6,6 @@
 #include <stdlib.h>
 
 #include "Types.h"
-#include "Strings.h"
 
 typedef enum LexerTokenType {
     TOK_INT,
@@ -78,7 +77,7 @@ Define_type_of_value(Token* token);
  * 
  * @return                          1 or 0 (true or false)
  */
-bool
+bool_t
 isDataType(LexerTokenType token_type);
 
 /**
@@ -88,7 +87,7 @@ isDataType(LexerTokenType token_type);
  * 
  * @return                          1 or 0 (true or false)  
  */
-bool
+bool_t
 isAlpha(const char* str);
 
 /**
@@ -98,7 +97,7 @@ isAlpha(const char* str);
  * 
  * @return                          1 or 0 (true of false)
  */
-bool
+bool_t
 isDigits(const char* str);
 
 
@@ -110,7 +109,7 @@ isDigits(const char* str);
  * 
  * @return                          1 or 0 (true of false)
  */
-bool
+bool_t
 isValidSymbol(const char symbol);
 
 /**
@@ -120,7 +119,7 @@ isValidSymbol(const char symbol);
  * 
  * @return                          1 or 0 (true or false)
  */
-bool
+bool_t
 isObjVarName(const char* name);
 
 #endif

@@ -1,6 +1,6 @@
 #include "./Include/Calculator.h"
 
-bool
+bool_t
 isValidExmplSymbol(LexerTokenType tok_type){
     if(
         tok_type == TOK_NUMBER ||

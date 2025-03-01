@@ -99,7 +99,7 @@ Release_head_obj(HeadObject* head){
  * @param name                  name by which will be search an object
  * @param head                  head of objects
  */
-bool
+bool_t
 isThere(const char* name, HeadObject* head);
 
 /**

@@ -29,18 +29,7 @@ main(int argc, char** argv){
     }
 
     result = CreateError("NullErr", -2, -9);
-
-    #if DEBUG == 1
-    fprintf(stdout, "Error tracker thread create...\n");
-    #endif
-    pthread_t error_thread;
-    pthread_create(
-        &error_thread,
-        NULL,
-        CheckToError,
-        NULL
-    );
-
+    
     char* buffer;
     length_n count_of_words;
 

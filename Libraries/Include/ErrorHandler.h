@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct ErrorStruct;
-
 #include "Tokens.h"
 #include "Strings.h"
 

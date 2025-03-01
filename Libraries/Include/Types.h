@@ -7,7 +7,7 @@
 #define true 1
 #define false 0
 
-typedef uint8_t bool;
+typedef uint8_t bool_t;
 
 typedef enum {
     TYPE_DIGIT,
@@ -25,7 +25,7 @@ typedef enum {
  */
 typedef union Value {
     int32_t int_value;
-    bool bool_value;
+    bool_t bool_value;
     char char_value;
     float float_value;
     double double_value;
@@ -50,7 +50,7 @@ Select_correct_digit_value(Type type, Value* value, float new_value);
  * 
  * @return                      true or false
  */
-bool
+bool_t
 Validate_value(Type type, Value value);
 
 #endif

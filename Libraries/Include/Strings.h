@@ -6,10 +6,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "ErrorHandler.h"
+#include "Tokens.h"
 
 typedef unsigned long long symbol_n, length_n, strsize_t;
 typedef long line_n, strfpos_t;
+
+struct ErrorStruct*
+CreateError(const char* error_text, long long error_line, long long error_symbol);
 
 /**
  * release words
@@ -68,7 +71,7 @@ Read_line_before_symbol_from_file(char** line_p, FILE* stream, char symbol);
  * @return              error object. if error was happened - return object, else - return null
  */
 struct ErrorStruct*
-Divide_line_into_words(char*** words_buffer_p, char* line, char separator, bool semic);
+Divide_line_into_words(char*** words_buffer_p, char* line, char separator, bool_t semic);
 
 /**
  * calculate length of line from file stream
@@ -105,7 +108,7 @@ Get_length_of_word(strsize_t* length_p, char* line, char separator);
  * @return              error object. if error was happened - return object, else - return null
  */
 struct ErrorStruct*
-Count_of_words_in_line(length_n* count_p, char* line, char separator, bool semic);
+Count_of_words_in_line(length_n* count_p, char* line, char separator, bool_t semic);
 
 /**
  * calculate words count and its length
@@ -118,7 +121,7 @@ Count_of_words_in_line(length_n* count_p, char* line, char separator, bool semic
  * @return              error object. if error was happened - return object, else - return null
  */
 struct ErrorStruct*
-Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator, bool semic);
+Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator, bool_t semic);
 
 /**
  * translate word to ascii code for each char

@@ -15,7 +15,7 @@
  * 
  * @return                  true or false 
  */
-bool
+bool_t
 isValidExmplSymbol(LexerTokenType tok_type);
 
 /**

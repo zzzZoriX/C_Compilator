@@ -1,5 +1,6 @@
 #include "./Include/Tokens.h"
 #include <stdio.h>
+#include <string.h>
 
 Token*
 Define_token(Token* last_token, const char* word){
@@ -8,30 +9,30 @@ Define_token(Token* last_token, const char* word){
 
     token = &((Token)NULL_TOKEN);
 
-    if(strcmp(word, "int") == 0)            { token->type = TOK_INT, token->value = strdup(word); }
-    else if(strcmp(word, "char") == 0)      { token->type = TOK_CHAR_T, token->value = strdup(word); }
-    else if(strcmp(word, "float") == 0)     { token->type = TOK_FLOAT, token->value = strdup(word); }
-    else if(strcmp(word, "double") == 0)    { token->type = TOK_DOUBLE, token->value = strdup(word); }
-    else if(strcmp(word, "string") == 0)    { token->type = TOK_STRING_T, token->value = strdup(word); }
-    else if(strcmp(word, "bool") == 0)      { token->type == TOK_BOOL, token->value = strdup(word); }
+    if(strcmp(word, "int") == 0)            { token->type = TOK_INT, token->value = _strdup(word); }
+    else if(strcmp(word, "char") == 0)      { token->type = TOK_CHAR_T, token->value = _strdup(word); }
+    else if(strcmp(word, "float") == 0)     { token->type = TOK_FLOAT, token->value = _strdup(word); }
+    else if(strcmp(word, "double") == 0)    { token->type = TOK_DOUBLE, token->value = _strdup(word); }
+    else if(strcmp(word, "string") == 0)    { token->type = TOK_STRING_T, token->value = _strdup(word); }
+    else if(strcmp(word, "bool") == 0)      { token->type = TOK_BOOL, token->value = _strdup(word); }
 
     else if(
         (isDataType(last_token->type) && isObjVarName(word)) ||
-        (last_token->value != "\"" && isObjVarName(word))
+        (strcmp(last_token->value, "\"") != 0 && isObjVarName(word))
     ) {
-        token->type = TOK_IDENT, token->value = strdup(word);
+        token->type = TOK_IDENT, token->value = _strdup(word);
     }
 
-    else if(isDigits(word))                 { token->type = TOK_NUMBER, token->value = strdup(word); }
-    else if(*word == '+')                    { token->type = TOK_PLUS, token->value = strdup(word); }
-    else if(*word == '-')                    { token->type = TOK_MINUS, token->value = strdup(word); }
-    else if(*word == '*')                    { token->type = TOK_MULTI, token->value = strdup(word); }
-    else if(*word == '/')                    { token->type = TOK_DIVIDE, token->value = strdup(word); }
-    else if(*word == '(')                    { token->type = TOK_LPAREN, token->value = strdup(word); }
-    else if(*word == ')')                    { token->type = TOK_RPAREN, token->value = strdup(word); }
+    else if(isDigits(word))                 { token->type = TOK_NUMBER, token->value = _strdup(word); }
+    else if(*word == '+')                    { token->type = TOK_PLUS, token->value = _strdup(word); }
+    else if(*word == '-')                    { token->type = TOK_MINUS, token->value = _strdup(word); }
+    else if(*word == '*')                    { token->type = TOK_MULTI, token->value = _strdup(word); }
+    else if(*word == '/')                    { token->type = TOK_DIVIDE, token->value = _strdup(word); }
+    else if(*word == '(')                    { token->type = TOK_LPAREN, token->value = _strdup(word); }
+    else if(*word == ')')                    { token->type = TOK_RPAREN, token->value = _strdup(word); }
 
-    else if(*word == '=')                   { token->type = TOK_ASSIGN, token->value = strdup(word); }
-    else if(*word == ';')                   { token->type = TOK_SEMIC, token->value = strdup(word); }
+    else if(*word == '=')                   { token->type = TOK_ASSIGN, token->value = _strdup(word); }
+    else if(*word == ';')                   { token->type = TOK_SEMIC, token->value = _strdup(word); }
 
     return token;
 }
@@ -59,7 +60,7 @@ Define_type_of_value(Token* token){
     return TYPE_UNDEF;
 }
 
-bool
+bool_t
 isDataType(LexerTokenType token_type){
     if(
         token_type == TOK_INT      ||
@@ -72,7 +73,7 @@ isDataType(LexerTokenType token_type){
     return false;
 }
 
-bool
+bool_t
 isAlpha(const char* str){
     for(size_t i = 0; i < strlen(str); ++i)
         if(!isalpha(str[i])) return false;
@@ -80,7 +81,7 @@ isAlpha(const char* str){
     return true;
 }
 
-bool
+bool_t
 isDigits(const char* str){
     for(size_t i = 0; i < strlen(str); ++i)
         if(!isdigit(str[i])) return false;
@@ -88,11 +89,11 @@ isDigits(const char* str){
     return true;
 }
 
-bool
+bool_t
 isValidSymbol(const char symbol)
 { return (isalnum(symbol) || symbol == '_'); }
 
-bool
+bool_t
 isObjVarName(const char* name){
     if(name == NULL || *name == '\0') return false;
     else if(!isalpha(*name) && *name != '_') return false;

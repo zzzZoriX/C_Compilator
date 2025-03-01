@@ -2,7 +2,6 @@
 #define INTERPRITATOR_H
 
 #include <stdio.h>
-#include <pthread.h>
 
 #include "Tokens.h"
 #include "Types.h"
