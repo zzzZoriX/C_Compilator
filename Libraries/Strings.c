@@ -255,3 +255,20 @@ Get_length_of_num(int n){
 
     return length;
 }
+
+char*
+concat(const char* src, const char* str) {
+    strsize_t new_string_length = strlen(src) + strlen(str);
+    
+    char* new_str = (char*)malloc(new_string_length * sizeof(char));
+    if(!new_str) return NULL;
+
+    strsize_t i = 0;
+    for(; i < strlen(src); ++i)
+        new_str[i] = src[i];
+
+    for(strsize_t k = 0; k < strlen(str) && i < new_string_length; ++i, ++k)
+        new_str[i] = str[k];
+
+    return new_str;
+}

@@ -53,9 +53,9 @@ Define_type(LexerTokenType token_type){
 
 Type
 Define_type_of_value(Token* token){
-    if(token->value == "\"") return TYPE_STRING;
-    if(token->value == "true" || token->value == "false") return TYPE_BOOL;
-    if(isDigits(token->value) || token->value == "(" || isObjVarName(token->value)) return TYPE_DIGIT;
+    if(strcmp(token->value, "\"")) return TYPE_STRING;
+    if(strcmp(token->value, "true") || strcmp(token->value, "false")) return TYPE_BOOL;
+    if(isDigits(token->value) || strcmp(token->value, "(") || isObjVarName(token->value)) return TYPE_DIGIT;
 
     return TYPE_UNDEF;
 }

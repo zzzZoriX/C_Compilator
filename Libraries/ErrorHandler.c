@@ -36,7 +36,7 @@ CheckToError(){
 
 void
 PrintError(ErrorStruct* error){
-    fprintf(stderr, "%lld.%lld | %s\nToken - %d\n", error->error_line, error->error_symbol ,error->error_message);
+    fprintf(stderr, "%lld.%lld | %s\n", error->error_line, error->error_symbol, error->error_message);
     RealeaseError(error);
 }
 

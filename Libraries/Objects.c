@@ -48,7 +48,7 @@ Init_obj(const char* obj_name, Type obj_type, Value obj_value){
     Object* obj = (Object*)malloc(sizeof(Object));
     if(!obj) return NULL;
 
-    obj->object_name = strdup(obj_name);
+    obj->object_name = _strdup(obj_name);
     if(!obj->object_name){
         free(obj);
         fprintf(stderr, "Invalid object name\n");

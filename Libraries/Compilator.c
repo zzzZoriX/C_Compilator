@@ -42,7 +42,7 @@ Lexer(Token** tokens_p, FILE* input_file_stream){
         token = Define_token(&tokens[token_i], words[word_i]);
         if(token == &(Token)NULL_TOKEN){
             char* error_text = "Unknown word: ";
-            error_text = strcat(error_text, words[word_i]);
+            error_text = concat(error_text, words[word_i]);
             return CreateError(error_text, current_parse_line, -1);
         }
 
@@ -86,7 +86,7 @@ Parser(Token* tokens, length_n count_of_words){
         switch(tokens[token_index].type){
             
             case TOK_IDENT:
-                current_object_name = strdup(tokens[token_index].value);
+                current_object_name = _strdup(tokens[token_index].value);
                 break;
 
             case TOK_ASSIGN:
@@ -104,7 +104,7 @@ Parser(Token* tokens, length_n count_of_words){
 
             default:
                 char* error_msg = "Undefined token: ";
-                error_msg;
+                error_msg = concat(error_msg, tokens[token_index].value);
                 return CreateError(error_msg, current_parse_line, -1);
         }
 
@@ -113,4 +113,6 @@ Parser(Token* tokens, length_n count_of_words){
 
     Release_head_obj(var_head);
     //Release_head_obj(cmd_head);
+
+    return NULL;
 }

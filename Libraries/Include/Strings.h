@@ -143,4 +143,14 @@ Word_to_ascii(const char* word);
 length_n
 Get_length_of_num(int n);
 
+/**
+ * @brief more secure string concat. function
+ * 
+ * @param src           source string
+ * @param str           string to add
+ * @return              char* 
+ */
+char*
+concat(const char* src, const char* str);
+
 #endif
