@@ -1,4 +1,5 @@
 #include "./include/ErrorHandler.h"
+#include "Include/ErrorHandler.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -7,7 +8,6 @@
 #endif /* _WIN32 */
 
 line_n lines = 0;
-ErrorStruct* result = NULL;
 
 ErrorStruct*
 CreateError(const char* error_text, err_line error_line, err_symbol error_symbol){
@@ -25,9 +25,9 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
 }
 
 void*
-CheckToError(){
-    if(result && result->error_symbol != -9){
-        PrintError(result);
+CheckToError(ErrorStruct* err){
+    if(err && err->error_symbol != -9){
+        PrintError(err);
         exit(1);
     }
 }

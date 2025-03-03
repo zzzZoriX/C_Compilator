@@ -47,9 +47,11 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
  * check to an error has been happined
  * 
  * use lib-variable(defined in ErrorHandler.c) as results of functions
+ *
+ * @param err           error which need to check
  */
 void*
-CheckToError();
+CheckToError(ErrorStruct* err);
 
 /**
  * print the error
