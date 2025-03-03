@@ -1,5 +1,4 @@
 #include "./include/ErrorHandler.h"
-#include "Include/ErrorHandler.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -24,7 +23,7 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
     return error;
 }
 
-void*
+void
 CheckToError(ErrorStruct* err){
     if(err && err->error_symbol != -9){
         PrintError(err);
