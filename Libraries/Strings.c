@@ -1,4 +1,8 @@
 #include "./Include/Strings.h"
+#include "Include/Types.h"
+
+#define DEBUG 1
+
 
 extern line_n current_parse_line;
 
@@ -24,6 +28,7 @@ Delete_spaces(char** buffer_p, const char* str){
 
     str_wo_space[k] = '\0';
 
+    free(*buffer_p);
     *buffer_p = str_wo_space;
 
     return NULL;
@@ -57,6 +62,7 @@ Delete_extra_spaces(char** buffer_p, char* str) {
 
     str_wo_extra_spaces[j] = '\0';
 
+    free(*buffer_p);
     *buffer_p = str_wo_extra_spaces;
 
     return NULL;
@@ -93,18 +99,24 @@ Read_line_before_symbol_from_file(char** line_p, FILE* stream, char symbol){
 
 struct ErrorStruct*
 Divide_line_into_words(char*** words_buffer_p, char* line, char separator, bool_t semic){
-    char* save_pointer_position = line;
+    char* save_pointer_position = line, ** words;
 
     /* initialize words array */
-    length_n* lengths_of_words;
-    length_n count_of_words;
+    length_n* lengths_of_words, count_of_words;
 
     Count_of_words_in_line(&count_of_words, line, separator, semic);
     Get_lengths_of_words(&lengths_of_words, line, separator, semic);
-    
-    char** words = (char**)malloc(count_of_words * sizeof(char*));
+
+
+    #ifdef DEBUG
+    printf("count_of_words = %zu\nline = %s\n\nsizeof(char**) = %zu\nsizeof(char*) = %zu\nmemory for words array = %zu", count_of_words, line, sizeof(char**), sizeof(char*), sizeof(char*) * count_of_words);
+    #endif
+
+    words = (char**)calloc(count_of_words, sizeof(char*));
     if(!words)
         return CreateError("Memory allocating failed for words\n", current_parse_line, -1);
+
+    printf("test\n");
 
     strsize_t index = 0;
     for(length_n i = 0; i < count_of_words; ++i){
@@ -118,9 +130,8 @@ Divide_line_into_words(char*** words_buffer_p, char* line, char separator, bool_
 
     /* divide */
     length_n i = 0, k = 0;
-    length_n length_of_line = strlen(line);
-    while(*line != '\0'){
-        if(*line != separator && *line != '\n' && *line != ';')
+    while(*line != '\0' && i < count_of_words){
+        if(*line != separator && *line != '\n' && (!semic || !isSpecSymbol(*line)))
             words[i][k++] = *line;
         else{
             if(k > 0){
@@ -128,7 +139,7 @@ Divide_line_into_words(char*** words_buffer_p, char* line, char separator, bool_
                 k = 0;
             }
 
-            if (*line == ';') {
+            if (isSpecSymbol(*line) && semic){
                 words[i][k++] = *line;
                 words[i++][k] = '\0';
                 k = 0;
@@ -136,6 +147,7 @@ Divide_line_into_words(char*** words_buffer_p, char* line, char separator, bool_
         }
         ++line;
     }
+    printf("test\n");
 
     if(k > 0)
         words[i][k] = '\0';
@@ -184,7 +196,7 @@ Count_of_words_in_line(length_n* count_p, char* line, char separator, bool_t sem
     length_n count_of_words = 1;
 
     while(*line != '\0'){
-        if(*line == separator || *line == '\n' || (semic && *line == ';'))
+        if(*line == separator || *line == '\n' || (semic && isSpecSymbol(*line)))
             ++count_of_words;
 
         ++line;
@@ -207,11 +219,14 @@ Get_lengths_of_words(strsize_t** lengths_p, char* line, char separator, bool_t s
 
     strsize_t length_of_word = 0, index = 0;
     while(*line != '\0'){
-        if(*line != separator && *line != '\n')
+        if(*line != separator && *line != '\n' && isSpecSymbol(*line))
             ++length_of_word;
         else{
             lengths_of_words[index++] = length_of_word;
             length_of_word = 0;
+
+            if(isSpecSymbol(*line))
+                lengths_of_words[index++] = 1;
         }
         ++line;
     }
@@ -271,4 +286,9 @@ concat(const char* src, const char* str) {
         new_str[i] = str[k];
 
     return new_str;
+}
+
+bool_t
+isSpecSymbol(char c) {
+    return (c == ';' || c == '"' || c == '\'' || c == ')' || c == '(');
 }

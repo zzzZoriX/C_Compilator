@@ -7,6 +7,7 @@
 #include <string.h>
 
 #include "Tokens.h"
+#include "Types.h"
 
 typedef unsigned long long symbol_n, length_n, strsize_t;
 typedef long line_n, strfpos_t;
@@ -152,5 +153,14 @@ Get_length_of_num(int n);
  */
 char*
 concat(const char* src, const char* str);
+
+/**
+ * @brief check the symbol is spec
+ * 
+ * @param c             symbol which need to check
+ * @return              bool_t 
+ */
+bool_t
+isSpecSymbol(char c);
 
 #endif
