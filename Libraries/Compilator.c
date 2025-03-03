@@ -1,10 +1,11 @@
 #include "./Include/Compilator.h"
+#include "include/ErrorHandler.h"
 
 #define DEBUG 0
 
 line_n current_parse_line = 0;
 Token empty_token = NULL_TOKEN;
-extern ErrorStruct* result;
+ErrorStruct* result;
 
 ErrorStruct*
 Lexer(Token** tokens_p, FILE* input_file_stream){
@@ -13,8 +14,11 @@ Lexer(Token** tokens_p, FILE* input_file_stream){
     length_n count_of_words = 0;
 
     result = Read_line_before_symbol_from_file(&line, input_file_stream, EOF);
+    CheckToError(result);
     result = Delete_extra_spaces(&line, line);
+    CheckToError(result);
     result = Divide_line_into_words(&words, line, SEPARATOR, true);
+    CheckToError(result);
 
     Count_of_words_in_line(&count_of_words, line, SEPARATOR, true);
 
@@ -29,7 +33,7 @@ Lexer(Token** tokens_p, FILE* input_file_stream){
     size_t word_i = 0, token_i = 0;;
     
     token = Define_token(&empty_token, words[word_i]);
-    if(token == &(Token)NULL_TOKEN){
+    if(token->type == TOK_NULL){
         char* error_text = "Unknown word: ";
         error_text = concat(error_text, words[word_i]);
         
@@ -40,7 +44,7 @@ Lexer(Token** tokens_p, FILE* input_file_stream){
     ++word_i;
     while(word_i < count_of_words){
         token = Define_token(&tokens[token_i], words[word_i]);
-        if(token == &(Token)NULL_TOKEN){
+        if(token->type == TOK_NULL){
             char* error_text = "Unknown word: ";
             error_text = concat(error_text, words[word_i]);
             return CreateError(error_text, current_parse_line, -1);

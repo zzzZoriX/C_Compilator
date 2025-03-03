@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "c:/c_compilator/libraries/include/Compilator.h"
 
-extern ErrorStruct* result;
-
 #define DEBUG 0
 
 /*
@@ -28,7 +26,7 @@ main(int argc, char** argv){
         exit(1);
     }
 
-    result = CreateError("NullErr", -2, -9);
+    ErrorStruct* result = CreateError("NullErr", -2, -9);
     
     char* buffer;
     length_n count_of_words;
@@ -38,9 +36,9 @@ main(int argc, char** argv){
     #endif
 
     result = Read_line_before_symbol_from_file(&buffer, input_file_stream, EOF);
-    CheckToError();
+    CheckToError(result);
     result = Count_of_words_in_line(&count_of_words, buffer, SEPARATOR, true);
-    CheckToError();
+    CheckToError(result);
 
     fseek(input_file_stream, 0, SEEK_SET);
 
@@ -51,14 +49,14 @@ main(int argc, char** argv){
     #endif
     
     result = Lexer(&tokens, input_file_stream);
-    CheckToError();
+    CheckToError(result);
 
     #if DEBUG == 1
     fprintf(stdout, "Parser...\n");
     #endif
     
     result = Parser(tokens, count_of_words);
-    CheckToError();
+    CheckToError(result);
 
     free(tokens);
 

@@ -7,32 +7,40 @@ Define_token(Token* last_token, const char* word){
     Token* token = (Token*)malloc(sizeof(Token));
     if(!token) return NULL;
 
-    token = &((Token)NULL_TOKEN);
+    token->type = TOK_NULL;
+    token->value = _strdup(word);
 
-    if(strcmp(word, "int") == 0)            { token->type = TOK_INT, token->value = _strdup(word); }
-    else if(strcmp(word, "char") == 0)      { token->type = TOK_CHAR_T, token->value = _strdup(word); }
-    else if(strcmp(word, "float") == 0)     { token->type = TOK_FLOAT, token->value = _strdup(word); }
-    else if(strcmp(word, "double") == 0)    { token->type = TOK_DOUBLE, token->value = _strdup(word); }
-    else if(strcmp(word, "string") == 0)    { token->type = TOK_STRING_T, token->value = _strdup(word); }
-    else if(strcmp(word, "bool") == 0)      { token->type = TOK_BOOL, token->value = _strdup(word); }
+    if(strcmp(word, "int") == 0)            token->type = TOK_INT;
+    else if(strcmp(word, "char") == 0)      token->type = TOK_CHAR_T;
+    else if(strcmp(word, "float") == 0)     token->type = TOK_FLOAT;
+    else if(strcmp(word, "double") == 0)    token->type = TOK_DOUBLE;
+    else if(strcmp(word, "string") == 0)    token->type = TOK_STRING_T;
+    else if(strcmp(word, "bool") == 0)      token->type = TOK_BOOL;
 
     else if(
         (isDataType(last_token->type) && isObjVarName(word)) ||
         (strcmp(last_token->value, "\"") != 0 && isObjVarName(word))
     ) {
-        token->type = TOK_IDENT, token->value = _strdup(word);
+        token->type = TOK_IDENT;
     }
 
-    else if(isDigits(word))                 { token->type = TOK_NUMBER, token->value = _strdup(word); }
-    else if(*word == '+')                    { token->type = TOK_PLUS, token->value = _strdup(word); }
-    else if(*word == '-')                    { token->type = TOK_MINUS, token->value = _strdup(word); }
-    else if(*word == '*')                    { token->type = TOK_MULTI, token->value = _strdup(word); }
-    else if(*word == '/')                    { token->type = TOK_DIVIDE, token->value = _strdup(word); }
-    else if(*word == '(')                    { token->type = TOK_LPAREN, token->value = _strdup(word); }
-    else if(*word == ')')                    { token->type = TOK_RPAREN, token->value = _strdup(word); }
+    else if(isDigits(word))                 token->type = TOK_NUMBER;
+    else if(
+        strcmp(last_token->value, "\"") &&
+        isAlpha(word)
+    ) {
+        token->type = TOK_STRING_T;
+    }
 
-    else if(*word == '=')                   { token->type = TOK_ASSIGN, token->value = _strdup(word); }
-    else if(*word == ';')                   { token->type = TOK_SEMIC, token->value = _strdup(word); }
+    else if(*word == '+')                    token->type = TOK_PLUS;
+    else if(*word == '-')                    token->type = TOK_MINUS;
+    else if(*word == '*')                    token->type = TOK_MULTI;
+    else if(*word == '/')                    token->type = TOK_DIVIDE;
+    else if(*word == '(')                    token->type = TOK_LPAREN;
+    else if(*word == ')')                    token->type = TOK_RPAREN;
+
+    else if(*word == '=')                   token->type = TOK_ASSIGN;
+    else if(*word == ';')                   token->type = TOK_SEMIC;
 
     return token;
 }
