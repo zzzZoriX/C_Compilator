@@ -31,7 +31,7 @@ Lexer(Token** tokens_p, FILE* input_file_stream){
     token = Define_token(&empty_token, words[word_i]);
     if(token == &(Token)NULL_TOKEN){
         char* error_text = "Unknown word: ";
-        error_text = strcat(error_text, words[word_i]);
+        error_text = concat(error_text, words[word_i]);
         
         return CreateError(error_text, current_parse_line, -1);
     }

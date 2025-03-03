@@ -26,11 +26,9 @@ CreateError(const char* error_text, err_line error_line, err_symbol error_symbol
 
 void*
 CheckToError(){
-    while(1){
-        if(result && result->error_symbol != -9){
-            PrintError(result);
-            exit(1);
-        }
+    if(result && result->error_symbol != -9){
+        PrintError(result);
+        exit(1);
     }
 }
 
